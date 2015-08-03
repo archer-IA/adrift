@@ -6,6 +6,9 @@ var express    = require('express'),
     ejs        = require('ejs');
 
 app.use(morgan('short'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 
 module.exports = app;
