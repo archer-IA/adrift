@@ -20,7 +20,7 @@ module.exports = function(grunt){
     },
     watch: {
       js: {
-        files: ['app/assets/src/js/*.js'],
+        files: ['app/assets/src/js/*'],
         tasks: ['uglify:dev']
       },
       css: {
