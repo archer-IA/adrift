@@ -6,7 +6,8 @@
   "scripts": {
     "test": "",
     "start": "node ./bin/start.js",
-    "dropdb": "node ./lib/dropdb"
+    "dropdb": "node ./lib/database/dropdb",
+    "seed": "node ./lib/database/seed"
   },
   "author": "",
   "license": "ISC",
