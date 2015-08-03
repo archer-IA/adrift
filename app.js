@@ -1,5 +1,5 @@
 var express    = require('express'),
-    app        = express();
+    app        = express(),
     morgan     = require('morgan'),
     bodyParser = require('body-parser'),
     fs         = require('fs'),
