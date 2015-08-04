@@ -30,6 +30,17 @@ app.set('layout', 'layout/layout.ejs');
 
 // Declaring all controllers to use
 
+// Sessions
+var sessionsController = require(__dirname + 'app/controllers/sessionsController.js');
+app.use('/sessions', sessionsController);
+
+// Users
+var usersController = require(__dirname + '/app/controllers/usersController.js');
+app.use('/users', usersController);
+
+// Topics
+var topicsController = require(__dirname + '/app/controllers/topicsController.js');
+app.use('/topics', topicsController);
 
 
 
