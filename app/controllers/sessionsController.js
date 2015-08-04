@@ -6,12 +6,14 @@ var express = require('express'),
 // login
 router.post('/login', function(req, res){
   var password = req.body.user.password;
-  User.findOne({username: req.body.user.username}, function(err, user){
+  User.findOne({username: req.body.user.username}).select('+password').exec( function(err, user){
     if(user){
       bcrypt.compare(password, user.password, function(err, check){
         if(check){
           req.session.currentUser = user;
           res.json({status: 'success'});
+        }else{
+          res.json({status: 'failure', message:"wrong username/password"})
         }
       })
     }else{

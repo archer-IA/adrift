@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var TopicSchema = new Schema({
   name: {type: String, required: true, unique: true},
-  messages: [messageSchema]
+  messages: {type: [messageSchema], select: false}
 })
 
 TopicSchema.methods.sampleMessage = function(){

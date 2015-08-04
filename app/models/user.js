@@ -6,8 +6,8 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
   username: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
-  email: {type: String, required: true, unique: true},
+  password: {type: String, required: true, select: false},
+  email: {type: String, required: true, unique: true, select: false},
   topics: [{type: Schema.Types.ObjectId}],
   pendingMessage: [MessageSchema],
   messages: [MessageSchema],
@@ -20,7 +20,7 @@ UserSchema.methods.sampleTopics = function(next){
   var length = this.topics.length;
   if( length > 0){
     var index = Math.floor(Math.random() * length);
-    Topic.findById(this.topics[index], function(err, topic){
+    Topic.findById(this.topics[index]).select('+messages').exec(function(err, topic){
       next(null, topic)
     });
   }else{
