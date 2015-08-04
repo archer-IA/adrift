@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 
 
 var topicSchema = new Schema({
-  name: {type: String, require: true, unique: true},
+  name: {type: String, required: true, unique: true},
   messages: [messageSchema]
 })
 

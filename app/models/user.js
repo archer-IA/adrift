@@ -4,10 +4,10 @@ var mongoose = require('mongoose'),
 
 
 var userSchema = new Schema({
-  username: {type: String, require: true, unique: true},
-  password: {type: String, require: true},
-  email: {type: String, require: true, unique: true},
-  locations: [{type: Schema.Types.ObjectId}],
+  username: {type: String, required: true, unique: true},
+  password: {type: String, required: true},
+  email: {type: String, required: true, unique: true},
+  topics: [{type: Schema.Types.ObjectId}],
   messages: [messageSchema],
   active: {type: Boolean, default: true},
   created_at: {type:Date, default: Date.now},

@@ -6,15 +6,15 @@ var express        = require('express'),
     ejs            = require('ejs'),
     expressLayouts = require('express-ejs-layouts'),
     paramsChecker  = require('./lib/middleware/params_checker'),
-    session        = require('express-session'),
-    bcrypt         = require('bcrypt');
+    session        = require('express-session');
+    // bcrypt         = require('bcrypt');
 
 // Declaring all middlewares needed
 app.use(morgan('short'));
 app.use(express.static(__dirname + '/app/assets'));
 app.use(expressLayouts);
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.urlencoded({extended: true}));
 app.use(paramsChecker);
 app.use(session({
   secret: process.env.ADRIFT_SECRET,
@@ -31,7 +31,7 @@ app.set('layout', 'layout/layout.ejs');
 // Declaring all controllers to use
 
 // Sessions
-var sessionsController = require(__dirname + 'app/controllers/sessionsController.js');
+var sessionsController = require(__dirname + '/app/controllers/sessionsController.js');
 app.use('/sessions', sessionsController);
 
 // Users
@@ -45,7 +45,7 @@ app.use('/topics', topicsController);
 
 
 // 404 message
-server.use(function(req, res, next){
+app.use(function(req, res, next){
   res.send('404: not found');
 })
 

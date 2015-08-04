@@ -35,7 +35,7 @@ router.get('/:id', function(req, res, next){
 
 // create
 router.post('/', function(req, res, next){
-  Topic.create(req.body.topic, function(err, topic){
+  Topic.create(req.body, function(err, topic){
     if(err){
       res.json({status: 'failure'});
     }else{
@@ -65,3 +65,5 @@ router.delete('/:id', function(req, res, next){
     }
   })
 })
+
+module.exports = router;

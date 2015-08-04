@@ -19,3 +19,5 @@ router.post('logout', function(req, res){
   req.session.currentUser = null;
   res.json({status: 'success'});
 })
+
+module.exports = router;

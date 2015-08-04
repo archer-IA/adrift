@@ -1,6 +1,7 @@
 var express = require('express'),
      router = express.Router(),
-     User   = require('../models/user.js');
+     User   = require('../models/user.js'),
+     bcrypt = requite('bcrypt');
 
 
 // index
@@ -16,29 +17,30 @@ router.get('/:id', function(req, res){
     if (err){
       res.json({status: 'failure'});
     } else {
-      res.json({user: user, status: 'success');
+      res.json({user: user, status: 'success'});
     }
   });
 });
 
 // create
 router.post('/', function(req,res){
-  User.create(req.body.user, function(err, user){
+  console.log(req.body);
+  User.create(req.body, function(err, user){
     if (err){
       res.json({status: 'failure'});
     } else {
-      res.json({user: user, status: 'success');
+      res.json({user: user, status: 'success'});
     }
   });
 });
 
 // update
 router.patch('/:id', function(req, res){
-  User.findByIdAndUpdate(req.params.id, req.body.user, function(err, user){
+  User.findByIdAndUpdate(req.params.id, req.body.user,{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
     } else {
-      res.json({user: user, status: 'success');
+      res.json({user: user, status: 'success'});
     }
   })
 })
@@ -55,4 +57,4 @@ router.delete('/:id', function(req, res){
   })
 })
 
-module.exports = {};
+module.exports = router;
