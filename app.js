@@ -3,8 +3,6 @@ var express        = require('express'),
     morgan         = require('morgan'),
     bodyParser     = require('body-parser'),
     fs             = require('fs'),
-    ejs            = require('ejs'),
-    expressLayouts = require('express-ejs-layouts'),
     paramsChecker  = require('./lib/middleware/params_checker'),
     session        = require('express-session');
     // bcrypt         = require('bcrypt');
@@ -12,7 +10,6 @@ var express        = require('express'),
 // Declaring all middlewares needed
 app.use(morgan('short'));
 app.use(express.static(__dirname + '/app/assets'));
-app.use(expressLayouts);
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: true}));
 app.use(paramsChecker);
@@ -41,8 +38,6 @@ app.use('/users', usersController);
 // Topics
 var topicsController = require(__dirname + '/app/controllers/topicsController.js');
 app.use('/topics', topicsController);
-
-
 
 // 404 message
 app.use(function(req, res, next){

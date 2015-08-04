@@ -1,7 +1,6 @@
 {
   "name": "adrift",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "",
@@ -26,5 +25,16 @@
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-sass": "^1.0.0"
-  }
+  },
+  "bin": {
+    "adrift": "start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/archer-IA/adrift.git"
+  },
+  "bugs": {
+    "url": "https://github.com/archer-IA/adrift/issues"
+  },
+  "homepage": "https://github.com/archer-IA/adrift"
 }

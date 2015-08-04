@@ -1,7 +1,7 @@
 var express = require('express'),
      router = express.Router(),
      User   = require('../models/user.js'),
-     bcrypt = requite('bcrypt');
+     bcrypt = require('bcrypt');
 
 
 // index
