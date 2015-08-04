@@ -3,11 +3,21 @@ var mongoose = require('mongoose'),
     messageSchema = require('./schemas/message.js');
 
 
-var topicSchema = new Schema({
+var TopicSchema = new Schema({
   name: {type: String, required: true, unique: true},
   messages: [messageSchema]
 })
 
+TopicSchema.methods.sampleMessage = function(){
+  var length = this.messages.length;
+  if(length > 0){
+    var index = Math.floor(Math.random() * length);
+    return this.messages[index];
+  }else{
+    return null;
+  }
+}
 
 
-module.exports = mongoose.model('Topic', topicSchema);
+
+module.exports = mongoose.model('Topic', TopicSchema);

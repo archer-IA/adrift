@@ -1,7 +1,11 @@
 var express = require('express'),
     router = express.Router(),
     User   = require('../models/user.js'),
+    isCurrentUser = require('../../lib/middleware/is_current_user.js'),
     Topic = require('../models/topic.js');
+
+// make sure they are signed in
+router.use(isCurrentUser);
 
 // index
 router.get('/', function(req, res, next){
@@ -35,7 +39,7 @@ router.get('/:id', function(req, res, next){
 
 // create
 router.post('/', function(req, res, next){
-  Topic.create(req.body, function(err, topic){
+  Topic.create(req.body.topic, function(err, topic){
     if(err){
       res.json({status: 'failure'});
     }else{
@@ -44,13 +48,17 @@ router.post('/', function(req, res, next){
   })
 })
 
+
 // update
 router.patch('/:id', function(req, res, next){
-  Topic.findByIdAndUpdate(req.params.id, req.body.topic, function(err, topic){
+  var message = req.body.topic.message;
+  message._author = req.session.currentUser._id;
+  message.topic = req.params.id;
+  Topic.findByIdAndUpdate(req.params.id, { $push: { messages: message} }, function(err, topic){
     if(err){
       res.json({status: 'failure'});
     }else{
-      res.json({topic: topic, status:'sucess'});
+      res.json({topic: topic, status:'success'});
     }
   })
 })
