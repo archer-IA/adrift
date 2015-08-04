@@ -4,8 +4,8 @@ var express        = require('express'),
     bodyParser     = require('body-parser'),
     fs             = require('fs'),
     paramsChecker  = require('./lib/middleware/params_checker'),
-    session        = require('express-session');
-    // bcrypt         = require('bcrypt');
+    session        = require('express-session'),
+    bcrypt         = require('bcrypt');
 
 // Declaring all middlewares needed
 app.use(morgan('short'));
