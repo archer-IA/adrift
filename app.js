@@ -42,6 +42,8 @@ app.use('/users', usersController);
 var topicsController = require(__dirname + '/app/controllers/topicsController.js');
 app.use('/topics', topicsController);
 
+var messagesController = require(__dirname + '/app/controllers/messagesController.js')
+app.use('/messages', messagesController)
 
 
 // 404 message

@@ -1,7 +1,7 @@
 var express = require('express'),
      router = express.Router(),
      User   = require('../models/user.js'),
-     bcrypt = requite('bcrypt');
+     bcrypt = require('bcrypt');
 
 
 // index
@@ -24,14 +24,19 @@ router.get('/:id', function(req, res){
 
 // create
 router.post('/', function(req,res){
-  console.log(req.body);
-  User.create(req.body, function(err, user){
-    if (err){
-      res.json({status: 'failure'});
-    } else {
-      res.json({user: user, status: 'success'});
-    }
-  });
+  var password = req.body.user.password;
+  bcrypt.genSalt(10, function(err, salt){
+    bcrypt.hash(password, salt, function(err, hash){
+      req.body.user.password = hash;
+      User.create(req.body.user, function(err, user){
+        if (err){
+          res.json({status: 'failure'});
+        } else {
+          res.json({user: user, status: 'success'});
+        }
+      });
+    })
+  })
 });
 
 // update
