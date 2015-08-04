@@ -24,7 +24,7 @@ UserSchema.methods.sampleTopics = function(next){
       next(null, topic)
     });
   }else{
-    next(true);
+    next({error: "User has no topics"});
   }
 }
 
