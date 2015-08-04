@@ -1,11 +1,11 @@
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema,
-    Message = require('./message.js');
+    messageSchema = require('./schemas/message.js');
 
 
 var locationSchema = new Schema({
-  name: String,
-  messages: [Message]
+  name: {type: String, require: true, unique: true},
+  messages: [messageSchema]
 })
 
 
