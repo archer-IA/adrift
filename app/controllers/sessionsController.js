@@ -12,6 +12,8 @@ router.post('/login', function(req, res){
         if(check){
           req.session.currentUser = user;
           res.json({status: 'success'});
+        }else{
+          res.json({status: 'failure', message:"wrong username/password"})
         }
       })
     }else{

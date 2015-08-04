@@ -1,16 +1,21 @@
+var bcrypt = require('bcrypt');
+
 module.exports = function(models, close){
 
   // data goes here...
 
+  var salt = bcrypt.genSaltSync(10);
+  var pass = bcrypt.hashSync('pwd123', salt)
+
   var user = new models.user({
     username: 'alex',
-    password: 'pwd123',
+    password: pass,
     email: 'blah'
   })
 
   var user2 = new models.user({
     username: "remina",
-    password: "pwd123",
+    password: pass,
     email: "blahToThe@max.com"
   })
 
@@ -65,6 +70,5 @@ module.exports = function(models, close){
   }).then(function(){
     close();
   })
-
 
 }
