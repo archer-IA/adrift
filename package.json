@@ -1,6 +1,6 @@
 {
   "name": "adrift",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "test": "",
@@ -8,14 +8,12 @@
     "dropdb": "node ./lib/database/dropdb",
     "seed": "node ./lib/database/seed"
   },
-  "author": "",
+  "author": "Alex Deschamps, Remina Greenfield",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^0.8.4",
     "body-parser": "^1.13.3",
-    "ejs": "^2.3.3",
     "express": "^4.13.3",
-    "express-ejs-layouts": "^1.1.0",
     "express-session": "^1.11.3",
     "mongoose": "^4.1.0",
     "morgan": "^1.6.1"
