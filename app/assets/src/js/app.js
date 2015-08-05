@@ -1,28 +1,31 @@
 var adriftApp = angular.module('adriftApp', [
   'ngRoute',
-  'userControllers'
+  'staticControllers',
+  'userControllers',
+  'topicControllers'
 ]);
 
-adriftApp.config(['$routeProvider',
-  function($routeProvider) {
+adriftApp.config(['$routeProvider', '$locationProvider',
+  function($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode({ enabled: true });
     $routeProvider.
       when('/welcome', {
         templateUrl: 'partials/static/welcome.html',
-        controller: 'StaticCtrl'
+        controller: 'StaticWelcomeCtrl'
       }).
-      when('/users', {
+      when('/drifters', {
         templateUrl: 'partials/users/index.html',
         controller: 'UserIndexCtrl'
       }).
-      when('/users/:userId', {
+      when('/drifters/:userId', {
         templateUrl: 'partials/users/show.html',
         controller: 'UserShowCtrl'
       }).
-      when('/topics', {
+      when('/locations', {
         templateUrl: 'partials/topics/index.html',
         controller: 'TopicIndexCtrl'
       }).
-      when('/topics/:topicId', {
+      when('/locations/:topicId', {
         templateUrl: 'partials/topics/show.html',
         controller: 'TopicShowCtrl'
       }).

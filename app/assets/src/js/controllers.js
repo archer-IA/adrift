@@ -2,7 +2,7 @@
 
 var staticControllers = angular.module('staticControllers', []);
 
-staticControllers.controller('IndexCtrl', ['$scope',
+staticControllers.controller('StaticWelcomeCtrl', ['$scope',
   function ($scope) {
 
   }]);
@@ -31,7 +31,7 @@ var topicControllers = angular.module('topicControllers', []);
 
 topicControllers.controller('TopicIndexCtrl', ['$scope', '$http',
   function ($scope, $http) {
-    $http.get('topics').success(function(data) {
+    $http.get('topics/').success(function(data) {
       console.log(data);
     });
   }]);

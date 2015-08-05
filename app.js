@@ -27,6 +27,7 @@ app.set('layout', 'layout/layout.ejs');
 
 // Declaring all controllers to use
 
+
 // Sessions
 var sessionsController = require(__dirname + '/app/controllers/sessionsController.js');
 app.use('/sessions', sessionsController);
@@ -42,6 +43,10 @@ app.use('/topics', topicsController);
 // Messages
 var messagesController = require(__dirname + '/app/controllers/messagesController.js')
 app.use('/messages', messagesController)
+
+// Static
+var staticController = require(__dirname + '/app/controllers/staticController.js');
+app.use('/', staticController);
 
 // 404 message
 app.use(function(req, res, next){
