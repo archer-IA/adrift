@@ -50,17 +50,6 @@ router.post('/', function(req, res, next){
 
 
 // update
-router.post('/:id/message', function(req, res, next){
-  var message = req.body.topic.message;
-  message._author = req.session.currentUser._id;
-  Topic.findByIdAndUpdate(req.params.id, { $push: { messages: message} }, function(err, topic){
-    if(err){
-      res.json({status: 'failure'});
-    }else{
-      res.json({topic: topic, status:'success'});
-    }
-  })
-})
 
 // delete
 router.delete('/:id', function(req, res, next){
