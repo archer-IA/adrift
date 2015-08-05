@@ -50,10 +50,9 @@ router.post('/', function(req, res, next){
 
 
 // update
-router.patch('/:id', function(req, res, next){
+router.post('/:id/message', function(req, res, next){
   var message = req.body.topic.message;
   message._author = req.session.currentUser._id;
-  message._topic = req.params.id;
   Topic.findByIdAndUpdate(req.params.id, { $push: { messages: message} }, function(err, topic){
     if(err){
       res.json({status: 'failure'});

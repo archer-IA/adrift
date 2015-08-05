@@ -5,6 +5,7 @@ var express        = require('express'),
     fs             = require('fs'),
     paramsChecker  = require('./lib/middleware/params_checker'),
     session        = require('express-session'),
+    ejs            = require('ejs'),
     bcrypt         = require('bcrypt');
 
 // Declaring all middlewares needed
