@@ -12,7 +12,7 @@ var express        = require('express'),
 app.use(morgan('short'));
 app.use(express.static(__dirname + '/app/assets'));
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(paramsChecker);
 app.use(session({
   secret: process.env.ADRIFT_SECRET,
@@ -53,7 +53,6 @@ app.use('/', staticController);
 app.use(function(req, res, next){
   res.send('404: not found');
 })
-
 
 
 module.exports = app;

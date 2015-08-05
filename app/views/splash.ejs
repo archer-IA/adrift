@@ -8,17 +8,18 @@
 </head>
 <body>
   <h1>Log In</h1>
-  <form action="/login" method="post">
-    <input type="text" val="user[username]" placeholder="Username">
-    <input type="text" val="user[username]" placeholder = "Password">
+  <form action="/sessions/login" method="post">
+    <input type="text" name="user[username]" placeholder="Username">
+    <input type="text" name="user[password]" placeholder = "Password">
+    <input type="submit" value="Log In">
   </form>
 
   <h1>Sign Up</h1>
   <form action="/users" method="post">
-    <input type="text" val="user[username]" placeholder="Username">
-    <input type="text" val="user[username]" placeholder = "Password">
-    <input type="email" val="user[email]" placeholder="Email">
+    <input type="text" name="user[username]" placeholder="Username">
+    <input type="text" name="user[password]" placeholder="Password">
+    <input type="email" name="user[email]" placeholder="Email">
+    <input type="submit" value="Sign Up">
   </form>
-  
 </body>
 </html>

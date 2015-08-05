@@ -8,8 +8,12 @@ router.get('/', function(req, res, next){
   res.render('splash', {});
 })
 
-router.use(isCurrentUser);
 
-router.get('/adrift'. function(req, res, next){
+router.get('/adrift', isCurrentUser, function(req, res, next){
   res.render('app', {});
 })
+
+
+
+
+module. exports = router;

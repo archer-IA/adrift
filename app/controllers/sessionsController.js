@@ -4,20 +4,33 @@ var express = require('express'),
      bcrypt = require('bcrypt');
 
 // login
-router.post('/login', function(req, res){
+router.post('/login.:format?', function(req, res){
   var password = req.body.user.password;
+  var format = req.params.format;
   User.findOne({username: req.body.user.username}).select('+password').exec( function(err, user){
     if(user){
       bcrypt.compare(password, user.password, function(err, check){
         if(check){
           req.session.currentUser = user;
-          res.json({status: 'success'});
+          if(format === 'json'){
+            res.json({status: 'success'});
+          }else{
+            res.redirect('/adrift');
+          }
         }else{
-          res.json({status: 'failure', message:"wrong username/password"})
+          if(format === 'json'){
+            res.json({status: 'failure', message:"wrong username/password"});
+          }else{
+            res.redirect('/');
+          }
         }
       })
     }else{
-      res.json({status: 'failure'});
+      if(format === 'json'){
+        res.json({status: 'failure', message:"wrong username/password"});
+      }else{
+        res.redirect('/');
+      }
     }
   });
 });
