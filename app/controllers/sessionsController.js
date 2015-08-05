@@ -36,14 +36,22 @@ router.post('/login.:format?', function(req, res){
 });
 
 // logout
-router.delete('/logout', function(req, res){
+router.delete('/logout.:format?', function(req, res){
+  var format = req.params.format;
   if(req.session.currentUser){
     req.session.currentUser = null;
-    res.json({status: 'success'});
+    if(format === 'json'){
+        res.json({status: 'success'});
+    }else{
+      res.redirect('/');
+    }
   }else{
-    res.json({status: 'failure', message: 'Not signed in'});
+    if(format === 'json'){
+      res.json({status: 'failure', message: 'Not signed in'});
+    }else{
+      res.redirect('/');
+    }
   }
-  
 })
 
 module.exports = router;

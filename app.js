@@ -31,11 +31,11 @@ app.set('layout', 'layout/layout.ejs');
 
 // Sessions
 var sessionsController = require(__dirname + '/app/controllers/sessionsController.js');
-app.use('/sessions', sessionsController);
+app.use('/sessions.:format?', sessionsController);
 
 // Users
 var usersController = require(__dirname + '/app/controllers/usersController.js');
-app.use('/users', usersController);
+app.use('/users.:format?', usersController);
 
 // Topics
 var topicsController = require(__dirname + '/app/controllers/topicsController.js');

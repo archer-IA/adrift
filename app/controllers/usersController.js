@@ -22,17 +22,28 @@ router.get('/:id', function(req, res){
   });
 });
 
+
 // create
-router.post('/', function(req,res){
+router.post('.:format?/', function(req,res){
+  var format = req.params.format;
   var password = req.body.user.password;
   bcrypt.genSalt(10, function(err, salt){
     bcrypt.hash(password, salt, function(err, hash){
       req.body.user.password = hash;
       User.create(req.body.user, function(err, user){
         if (err){
-          res.json({status: 'failure'});
+          if(format === 'json'){
+            res.json({status: 'failure'});
+          }else{
+            res.redirect('/');
+          }
         } else {
-          res.json({user: user, status: 'success'});
+          req.session.currentUser = user;
+          if(format === 'json'){
+            res.json({user: user, status: 'success'});
+          }else{
+            res.redirect('/adrift');
+          }
         }
       });
     })
