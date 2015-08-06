@@ -36,8 +36,32 @@ UserSchema.methods.hasPendingMessage = function(){
   return this.pendingMessage.length > 0;
 }
 
-UserSchema.methods.switchMessage = function(response){
-  
+UserSchema.methods.switchMessage = function(keep, next){
+  if(this.hasPendingMessage()){
+    var message = this.pendingMessage.splice(0,1)[0];
+    if(keep){
+      this.messages.push(message);
+    }
+    this.save(function(err, user){
+      if(err){
+        next(err, {status: 'error', error: 'could not save user after adding message'});
+      }else{
+        if(!keep){
+          Topic.findByIdAndUpdate({_id: message._topic}, {$push: {messages: message}}, function(err,topic){
+            if(err){
+              next(err, {status: 'error', error: 'could not save topic when puting message back'});
+            }else{
+              next(null, {status: 'success', message: message});
+            }
+          });
+        }else{
+          next(null, {status: 'success', message: message});
+        }
+      }
+    })
+  }else{
+    next({error: 'user has no pending messages'}, {status: 'error', error: 'user has no pending messages'});
+  }
 }
 
 
