@@ -41,7 +41,7 @@ router.post('/decision', function(req, res, next){
       console.log('user find error');
       res.json({status: 'error', message: 'could not find user'});
     }else{
-      user.switchMessage(req.body.response, function(err, response){
+      user.switchMessage(req.body.keep, function(err, response){
         res.json(response);
       })
     }
