@@ -1,1 +1,10 @@
 <h1>Topic Show</h1>
+
+<div ng-controller='TopicShowCtrl'>
+  <h2>{{ topic.name }}</h2>
+</div>
+
+<form ng-submit="addMessage(message)" ng-controller='MessageFormController'>
+  <textarea name="content" ng-model="topic.message.content"></textarea>
+  <input type="submit" value="click">
+</form>

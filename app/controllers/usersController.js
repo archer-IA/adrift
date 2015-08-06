@@ -22,7 +22,6 @@ router.get('/:id', function(req, res){
   });
 });
 
-
 // create
 router.post('.:format?/', function(req,res){
   var format = req.params.format;

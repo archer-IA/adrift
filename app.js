@@ -20,14 +20,12 @@ app.use(session({
   saveUninitialized: false
 }));
 
-
 // Declaring all options to set for the server
 app.set('views', __dirname + '/app/views');
 app.set("view engine", "ejs");
 app.set('layout', 'layout/layout.ejs');
 
 // Declaring all controllers to use
-
 
 // Sessions
 var sessionsController = require(__dirname + '/app/controllers/sessionsController.js');

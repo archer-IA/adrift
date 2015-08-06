@@ -11,10 +11,10 @@
 </head>
 <body ng-app="adriftApp">
 
-<h1>This is always here</h1>
-<a href="drifters">Users</a>
-<a href="locations">Topics</a>
-<a href="login">Log In</a>
+<a href="locations">Locations</a>
+<a href="collection/<%=currentUser._id%>">Collection</a>
+<a href="settings/<%=currentUser._id%>">Settings</a>
+<a href="user/logout">Log Out</a>
 
 <div ng-view></div>
 
