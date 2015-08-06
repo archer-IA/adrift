@@ -1,1 +1,13 @@
 <h1>User Collection</h1>
+
+<div ng-controller='UserCollectionCtrl'>
+
+  <button ng-class="{'active' : requested}" ng-click="requestMessage()">
+    {{ request }}
+  </button>
+
+  <div ng-if="{'pending' : true }">
+    {{ pendingMessageContent }}
+  </div>
+
+</div>
