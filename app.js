@@ -6,13 +6,15 @@ var express        = require('express'),
     paramsChecker  = require('./lib/middleware/params_checker'),
     session        = require('express-session'),
     ejs            = require('ejs'),
-    bcrypt         = require('bcrypt');
+    bcrypt         = require('bcrypt'),
+    methodOverride = require('method-override');
 
 // Declaring all middlewares needed
 app.use(morgan('short'));
 app.use(express.static(__dirname + '/app/assets'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 app.use(paramsChecker);
 app.use(session({
   secret: process.env.ADRIFT_SECRET,

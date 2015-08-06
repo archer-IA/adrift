@@ -2,6 +2,7 @@ var express = require('express'),
     router = express.Router(),
     User   = require('../models/user.js'),
     isCurrentUser = require('../../lib/middleware/is_current_user.js'),
+    isCurrentUserRedirect = require('../../lib/middleware/is_current_user_redirect.js'),    
     Topic = require('../models/topic.js');
 
 router.get('/', function(req, res, next){

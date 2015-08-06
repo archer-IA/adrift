@@ -46,7 +46,6 @@ router.post('/decision', function(req, res, next){
       })
     }
   });
-  
 })
 
 router.post('/', function(req, res, next){
