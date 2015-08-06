@@ -49,18 +49,8 @@ router.post('.:format?/', function(req,res){
   })
 });
 
-// update
-router.patch('/:id', function(req, res){
-  User.findByIdAndUpdate(req.params.id, req.body.user,{new: true}, function(err, user){
-    if(err){
-      res.json({status: 'failure'});
-    } else {
-      res.json({user: user, status: 'success'});
-    }
-  })
-})
-
-router.patch('/topic/:_topic', function(req, res){
+// subscriptions
+router.patch('/topics/:_topic', function(req, res){
   User.findByIdAndUpdate(req.session.currentUser._id, {$push: {topics: req.params._topic}},{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
@@ -70,8 +60,19 @@ router.patch('/topic/:_topic', function(req, res){
   })
 })
 
-router.delete('/topic/:_topic', function(req, res){
+router.delete('/topics/:_topic', function(req, res){
   User.findByIdAndUpdate(req.session.currentUser._id, {$pull: {topics: req.params._topic}},{new: true}, function(err, user){
+    if(err){
+      res.json({status: 'failure'});
+    } else {
+      res.json({user: user, status: 'success'});
+    }
+  })
+})
+
+// update
+router.patch('/:id', function(req, res){
+  User.findByIdAndUpdate(req.params.id, req.body.user,{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
     } else {
