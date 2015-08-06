@@ -14,13 +14,13 @@ adriftApp.config(['$routeProvider', '$locationProvider',
         templateUrl: 'partials/topics/index.html',
         controller: 'TopicIndexCtrl'
       }).
-      when('/adrift/settings/:userId', {
+      when('/adrift/settings', {
         templateUrl: 'partials/users/settings.html',
-        controller: 'UserShowCtrl'
+        controller: 'UserSettingsCtrl'
       }).
-      when('/adrift/collection/:userId', {
+      when('/adrift/collection', {
         templateUrl: 'partials/users/collection.html',
-        controller: 'UserShowCtrl'
+        controller: 'UserCollectionCtrl'
       }).
       when('/adrift/locations/:topicId', {
         templateUrl: 'partials/topics/show.html',

@@ -5,8 +5,7 @@
 </div>
 
 <button ng-class="{'active' : subscribed}" ng-controller='TopicSubscribeCtrl' ng-click="locationSubscribe()">{{ subscription }}</button>
-<br>
-<br>
+
 <form ng-submit="addMessage(message)" ng-controller='TopicMessageCtrl'>
   <textarea name="content" ng-model="message.content"></textarea>
   <input type="submit" value="click">

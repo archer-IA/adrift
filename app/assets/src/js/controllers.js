@@ -1,4 +1,4 @@
-// User Controller
+// User Controllers
 
 var userControllers = angular.module('userControllers', []);
 
@@ -9,14 +9,35 @@ userControllers.controller('UserIndexCtrl', ['$scope', '$http',
     });
   }]);
 
-userControllers.controller('UserShowCtrl', ['$scope', '$http', '$routeParams',
-  function($scope, $http, $routeParams) {
-    $http.get('users/' + $routeParams.userId).success(function(data) {
+userControllers.controller('UserCollectionCtrl', ['$scope', '$http', 
+  function($scope, $http) {
+    $http.get('users/current').success(function(data) {
+      $scope.pendingMessageContent = data.currentUser.pendingMessage[0].content[0];
+    });
+    $scope.request = 'Request';
+    $scope.requested = false;
+    $scope.requestMessage = function(){
+      if($scope.requested == false){ 
+        $http.get('messages/').
+          success(function(data, status) {
+            $scope.pendingMessageContent = data.message.content[0];
+        });
+        $scope.request = 'Requested'; 
+        $scope.requested = true;
+      } else if ($scope.requested == true) {
+        console.log('already requested');
+      };
+    };
+  }]);
+
+userControllers.controller('UserSettingsCtrl', ['$scope', '$http', '$routeParams',
+  function($scope, $http) {
+    $http.get('users/current').success(function(data) {
       console.log(data);
     });
   }]);
 
-// Topics Controller
+// Topics Controllers
 
 var topicControllers = angular.module('topicControllers', []);
 
@@ -49,25 +70,19 @@ topicControllers.controller('TopicSubscribeCtrl', ['$scope', '$http', '$routePar
 
       $scope.locationSubscribe = function(){
         if($scope.subscribed == false){ 
-        $http.patch('users/topics/' + $routeParams.topicId).
-        success(function(data, status) {
-            $scope.status = status;
-            $scope.data = data;
-            $scope.result = data;
-            console.log(data);
-        });
-        $scope.subscription = 'Subscribed'; 
-        $scope.subscribed = true;
+          $http.patch('users/topics/' + $routeParams.topicId).
+            success(function(data, status) {
+              console.log(data);
+          });
+          $scope.subscription = 'Subscribed'; 
+          $scope.subscribed = true;
         } else if ($scope.subscribed == true) {
           $http.delete('users/topics/' + $routeParams.topicId).
             success(function(data, status) {
-            $scope.status = status;
-            $scope.data = data;
-            $scope.result = data;
-            console.log(data);
-        });
-        $scope.subscription = 'Subscribe'; 
-        $scope.subscribed = false;
+              console.log(data);
+          });
+          $scope.subscription = 'Subscribe'; 
+          $scope.subscribed = false;
         };
       };
     });
@@ -88,3 +103,4 @@ topicControllers.controller('TopicMessageCtrl', ['$scope', '$http', '$routeParam
       $scope.message.content = '';   
     }; 
   }]);
+
