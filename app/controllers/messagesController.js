@@ -12,6 +12,8 @@ router.get('/', function(req, res, next){
   User.findById(id, function(err, user){
     if(err){
       res.json({status: 'error', error: 'user find error'});
+    }else if(user.can){
+
     }else{
       if(user.hasPendingMessage()){
         res.json({message: user.pendingMessage[0]});
@@ -22,6 +24,7 @@ router.get('/', function(req, res, next){
           }else{
             var message = topic.sampleMessage(user, function(err, message){
               if(err){
+                console.log(err);
                 res.json({status: 'error', error: 'message error'});
               }else{
                 res.json({message: message});

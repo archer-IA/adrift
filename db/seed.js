@@ -33,30 +33,30 @@ module.exports = function(models, close){
 
   user2.messages.push({
     _user: user._id,
-    _topic: topic1._id,
+    topicName: topic1.name,
     content: 'I belong to user 2'
   })
 
   topic1.messages.push({
     _user: user._id,
-    _topic: topic1._id,
+    topicName: topic1.name,
     content: 'Hi'
   })
   topic1.messages.push({
     _user: user._id,
-    _topic: topic1._id,
+    topicName: topic1.name,
     content: 'Blah'
   })
 
   topic2.messages.push({
     _user: user._id,
-    _topic: topic1._id,
+    topicName: topic1.name,
     content: 'Im in topic 2'
   })
 
   topic2.messages.push({
     _user: user._id,
-    _topic: topic1._id,
+    topicName: topic1.name,
     content: 'Duuuuuuuude'
   })
 

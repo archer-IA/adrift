@@ -6,7 +6,7 @@ var messageSchema = new Schema({
   _user: {type: Schema.Types.ObjectId, ref: 'User', required: true},
   anonymous: {type: Boolean, default: true},
   content: [{type: String, required: true, maxlength: 400}],
-  _topic: {type: Schema.Types.ObjectId, required: true},
+  topicName: {type: String, required: true},
   finders: [{type: Schema.Types.ObjectId, ref: 'User'}],
   flagged: {type: Boolean, default: false}
 })
