@@ -15,6 +15,7 @@ TopicSchema.methods.sampleMessage = function(user, next){
     var index = Math.floor(Math.random() * length);
     user.pendingMessage = this.messages[index];
     user.save(function(err, user){
+      console.log('in user save');
       if(err){
         next(err)
       }else{
