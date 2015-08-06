@@ -36,33 +36,41 @@ topicControllers.controller('TopicShowCtrl', ['$scope', '$http', '$routeParams',
 
 topicControllers.controller('TopicSubscribeCtrl', ['$scope', '$http', '$routeParams',
   function($scope, $http, $routeParams) {
+    $http.get('users/current').success(function(data) {
+      $scope.currentUser = data.currentUser;
 
-    $scope.subscription = 'Subscribe';
-    $scope.subscribed = false;
-
-    $scope.locationSubscribe = function(){
-      if($scope.subscribed == false){ 
-      $http.patch('users/topics/' + $routeParams.topicId).
-      success(function(data, status) {
-          $scope.status = status;
-          $scope.data = data;
-          $scope.result = data;
-          console.log(data);
-      });
-      $scope.subscription = 'Subscribed'; 
-      $scope.subscribed = true;
-      } else if ($scope.subscribed == true) {
-        $http.delete('users/topics/' + $routeParams.topicId).
-          success(function(data, status) {
-          $scope.status = status;
-          $scope.data = data;
-          $scope.result = data;
-          console.log(data);
-      });
-      $scope.subscription = 'Subscribe'; 
-      $scope.subscribed = false;
+      if($scope.currentUser.topics.indexOf($routeParams.topicId) != -1){
+        $scope.subscription = 'Subscribed';
+        $scope.subscribed = true;
+      } else {
+        $scope.subscription = 'Subscribe';
+        $scope.subscribed = false;
       };
-    };
+
+      $scope.locationSubscribe = function(){
+        if($scope.subscribed == false){ 
+        $http.patch('users/topics/' + $routeParams.topicId).
+        success(function(data, status) {
+            $scope.status = status;
+            $scope.data = data;
+            $scope.result = data;
+            console.log(data);
+        });
+        $scope.subscription = 'Subscribed'; 
+        $scope.subscribed = true;
+        } else if ($scope.subscribed == true) {
+          $http.delete('users/topics/' + $routeParams.topicId).
+            success(function(data, status) {
+            $scope.status = status;
+            $scope.data = data;
+            $scope.result = data;
+            console.log(data);
+        });
+        $scope.subscription = 'Subscribe'; 
+        $scope.subscribed = false;
+        };
+      };
+    });
   }]);
 
 topicControllers.controller('TopicMessageCtrl', ['$scope', '$http', '$routeParams',

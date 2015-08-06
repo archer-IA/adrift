@@ -1,7 +1,7 @@
 <h1>Topic Show</h1>
 
 <div ng-controller='TopicShowCtrl'>
-  <h2>{{ topic.name }}</h2>
+  <h2>{{ topic.name | capitalize}}</h2>
 </div>
 
 <button ng-class="{'active' : subscribed}" ng-controller='TopicSubscribeCtrl' ng-click="locationSubscribe()">{{ subscription }}</button>

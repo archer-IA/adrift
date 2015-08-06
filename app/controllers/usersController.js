@@ -12,8 +12,8 @@ router.get('/', function(req,res){
 });
 
 router.get('/current', function(req,res){
-  User.find({_id: req.sessions.currentUser}, function(err, user){
-    res.json({you: user});
+  User.findOne({_id: req.session.currentUser}, function(err, user){
+    res.json({currentUser: user});
   });
 });
 
