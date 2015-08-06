@@ -36,5 +36,9 @@ UserSchema.methods.hasPendingMessage = function(){
   return this.pendingMessage.length > 0;
 }
 
+UserSchema.methods.switchMessage = function(response){
+  
+}
+
 
 module.exports = mongoose.model('User', UserSchema);

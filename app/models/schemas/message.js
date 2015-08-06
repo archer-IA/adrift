@@ -11,4 +11,8 @@ var messageSchema = new Schema({
   flagged: {type: Boolean, default: false}
 })
 
+messageSchema.path('content').validate(function(value){
+  return value.length;
+}, 'content cannot be empty');
+
 module.exports = messageSchema;

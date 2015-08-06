@@ -9,25 +9,20 @@ router.use(isCurrentUser);
 // show
 router.get('/', function(req, res, next){
   var id = req.session.currentUser._id;
-  console.log('def in here');
   User.findById(id, function(err, user){
     if(err){
-      console.log(err);
-      res.json({status: 'error'});
+      res.json({status: 'error', error: 'user find error'});
     }else{
-      console.log('checking for pendning');
       if(user.hasPendingMessage()){
-        console.log('sending pending message');
         res.json({message: user.pendingMessage[0]});
       }else{
         var topic = user.sampleTopics(function(err, topic){;
-          console.log('topic');  
           if(err){
-            res.json({status: 'error'});
+            res.json({status: 'error', error: 'topic error'});
           }else{
             var message = topic.sampleMessage(user, function(err, message){
               if(err){
-                res.json({status: 'error'});
+                res.json({status: 'error', error: 'message error'});
               }else{
                 res.json({message: message});
               }
@@ -41,37 +36,48 @@ router.get('/', function(req, res, next){
 
 router.post('/decision', function(req, res, next){
   var id = req.session.currentUser._id;
-  if(req.body.response === 'yes'){
-    User.findById(id, function(err, user){
-      if(err){
-        console.log('user find error');
-        res.json({status: 'error'});
-      }else{
-        if(user.hasPendingMessage()){
-          var message = user.pendingMessage.splice(0,1);
+  User.findById(id, function(err, user){
+    if(err){
+      console.log('user find error');
+      res.json({status: 'error', message: 'could not find user'});
+    }else{
+      if(user.hasPendingMessage()){
+        var message = user.pendingMessage.splice(0,1)[0];
+        if(req.body.response === 'yes'){
           user.messages.push(message[0]);
-          console.log(message)
-          user.save(function(err, user){
-            if(err){
-              console.log(err);
-              res.json({status: 'error'});
+        }
+        user.save(function(err, user){
+          if(err){
+            console.log(err);
+            res.json({status: 'error', error: 'could not save user after adding message'});
+          }else{
+            if(req.body.response !== 'yes'){
+              console.log(message);
+              Topic.findByIdAndUpdate({_id: message._topic}, {$push: {messages: message}}, function(err,topic){
+                if(err){
+                  console.log(err);
+                  res.json({status: 'error', error: 'could not save topic when puting message back'});
+                }else{
+                  res.json({status: 'success', message: message})
+                }
+              });
             }else{
               res.json({status: 'success', message: message})
             }
-          })
-        }else{
-          res.json({status: 'error', error: "User has no pending message"});
-        }
+          }
+        })
+      }else{
+        res.json({status: 'error', error: 'user has no pending messages'});
       }
-    });
-  }else{
-
-  }
+    }
+  });
+  
 })
 
 router.post('/', function(req, res, next){
   var message = req.body.message;
   message._user = req.session.currentUser._id;
+  message.original_content = message.content || null;
   Topic.findByIdAndUpdate(message._topic, { $push: { messages: message} }, function(err, topic){
     if(err){
       res.json({status: 'failure', error: '500'});
