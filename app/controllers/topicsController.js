@@ -37,19 +37,6 @@ router.get('/:name', function(req, res, next){
   })
 })
 
-router.get('/id/:id', function(req, res, next){
-  Topic.findOne({ _id: req.params.id}, function(err, topic){
-    if(err){
-      res.json({status: 'failure'});
-    }else{
-      res.json({
-        topic: topic,
-        status: 'success'
-      })
-    }
-  })
-})
-
 // create
 router.post('/', function(req, res, next){
   Topic.create(req.body.topic, function(err, topic){
