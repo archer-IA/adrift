@@ -11,6 +11,12 @@ router.get('/', function(req,res){
   });
 });
 
+router.get('/current', function(req,res){
+  User.find({_id: req.sessions.currentUser}, function(err, user){
+    res.json({you: user});
+  });
+});
+
 // show 
 router.get('/:id', function(req, res){
   User.findById(req.params.id, function(err, user){
