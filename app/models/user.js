@@ -21,11 +21,19 @@ UserSchema.methods.sampleTopics = function(next){
   if( length > 0){
     var index = Math.floor(Math.random() * length);
     Topic.findById(this.topics[index]).select('+messages').exec(function(err, topic){
-      next(null, topic)
+      if(err){
+        next(err);
+      }else{
+        next(null, topic)
+      }
     });
   }else{
     next({error: "User has no topics"});
   }
+}
+
+UserSchema.methods.hasPendingMessage = function(){
+  return this.pendingMessage.length > 0;
 }
 
 
