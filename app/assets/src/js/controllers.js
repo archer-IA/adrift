@@ -1,13 +1,3 @@
-// Static Controller
-
-var sessionController = angular.module('sessionController', []);
-
-sessionController.controller('SessionLogoutCtrl', ['$scope', '$http',
-  function ($scope, $http) {
-    $http.delete('sessions/logout/').success(function(data) {
-    });
-  }]);
-
 // User Controller
 
 var userControllers = angular.module('userControllers', []);
