@@ -8,9 +8,7 @@ adriftApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true });
     $routeProvider.
-      when('/adrift/user/logout', {
-        controller: 'SessionLogoutCtrl'
-      }).
+
       when('/adrift/locations', {
         templateUrl: 'partials/topics/index.html',
         controller: 'TopicIndexCtrl'
