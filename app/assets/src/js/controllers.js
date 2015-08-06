@@ -36,15 +36,17 @@ topicControllers.controller('TopicShowCtrl', ['$scope', '$http', '$routeParams',
 
 topicControllers.controller('TopicMessageController', ['$scope', '$http', '$routeParams',
   function($scope, $http, $routeParams){
-    $scope.topic.message = {};
+    $scope.message = {_topic: $routeParams.topicId};
+
 
     $scope.addMessage = function(message){
-      $http.post('messages/', {'topic.message': $scope.topic.message}).
-
+      $scope.messageCopy = angular.copy($scope.message);
+      $http.post('messages/', {'message': $scope.messageCopy}).
       success(function(data, status) {
           $scope.status = status;
           $scope.data = data;
           $scope.result = data;
-      });    
+      }); 
+      $scope.message.content = '';   
     }; 
   }])
