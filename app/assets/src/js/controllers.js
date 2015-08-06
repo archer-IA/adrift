@@ -34,10 +34,40 @@ topicControllers.controller('TopicShowCtrl', ['$scope', '$http', '$routeParams',
     });
   }]);
 
-topicControllers.controller('TopicMessageController', ['$scope', '$http', '$routeParams',
+topicControllers.controller('TopicSubscribeCtrl', ['$scope', '$http', '$routeParams',
+  function($scope, $http, $routeParams) {
+
+    $scope.subscription = 'Subscribe';
+    $scope.subscribed = false;
+
+    $scope.locationSubscribe = function(){
+      if($scope.subscribed == false){ 
+      $http.patch('users/topics/' + $routeParams.topicId).
+      success(function(data, status) {
+          $scope.status = status;
+          $scope.data = data;
+          $scope.result = data;
+          console.log(data);
+      });
+      $scope.subscription = 'Subscribed'; 
+      $scope.subscribed = true;
+      } else if ($scope.subscribed == true) {
+        $http.delete('users/topics/' + $routeParams.topicId).
+          success(function(data, status) {
+          $scope.status = status;
+          $scope.data = data;
+          $scope.result = data;
+          console.log(data);
+      });
+      $scope.subscription = 'Subscribe'; 
+      $scope.subscribed = false;
+      };
+    };
+  }]);
+
+topicControllers.controller('TopicMessageCtrl', ['$scope', '$http', '$routeParams',
   function($scope, $http, $routeParams){
     $scope.message = {_topic: $routeParams.topicId};
-
 
     $scope.addMessage = function(message){
       $scope.messageCopy = angular.copy($scope.message);
@@ -49,4 +79,4 @@ topicControllers.controller('TopicMessageController', ['$scope', '$http', '$rout
       }); 
       $scope.message.content = '';   
     }; 
-  }])
+  }]);
