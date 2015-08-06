@@ -60,6 +60,26 @@ router.patch('/:id', function(req, res){
   })
 })
 
+router.patch('/topic/:_topic', function(req, res){
+  User.findByIdAndUpdate(req.session.currentUser._id, {$push: {topics: req.params._topic}},{new: true}, function(err, user){
+    if(err){
+      res.json({status: 'failure'});
+    } else {
+      res.json({user: user, status: 'success'});
+    }
+  })
+})
+
+router.delete('/topic/:_topic', function(req, res){
+  User.findByIdAndUpdate(req.session.currentUser._id, {$pull: {topics: req.params._topic}},{new: true}, function(err, user){
+    if(err){
+      res.json({status: 'failure'});
+    } else {
+      res.json({user: user, status: 'success'});
+    }
+  })
+})
+
 // destroy
 router.delete('/:id', function(req, res){
   User.findByIdAndUpdate(req.params.id, {active: false}, function(err){

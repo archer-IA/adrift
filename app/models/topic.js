@@ -8,7 +8,7 @@ var TopicSchema = new Schema({
   messages: {type: [messageSchema], select: false}
 })
 
-TopicSchema.methods.sampleMessage = function(){
+TopicSchema.methods.sampleMessage = function(next){
   var length = this.messages.length;
   if(length > 0){
     var index = Math.floor(Math.random() * length);
