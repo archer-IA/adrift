@@ -8,23 +8,24 @@ adriftApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true });
     $routeProvider.
-      when('/locations', {
+
+      when('/adrift/locations', {
         templateUrl: 'partials/topics/index.html',
         controller: 'TopicIndexCtrl'
       }).
-      when('/settings/:userId', {
+      when('/adrift/settings/:userId', {
         templateUrl: 'partials/users/settings.html',
         controller: 'UserShowCtrl'
       }).
-      when('/collection/:userId', {
+      when('/adrift/collection/:userId', {
         templateUrl: 'partials/users/collection.html',
         controller: 'UserShowCtrl'
       }).
-      when('/locations/:topicId', {
+      when('/adrift/locations/:topicId', {
         templateUrl: 'partials/topics/show.html',
         controller: 'TopicShowCtrl'
       }).
       otherwise({
-        redirectTo: '/locations'
+        redirectTo: '/adrift/locations'
       });
   }]);

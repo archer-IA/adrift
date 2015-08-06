@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <title>Adrift</title>
   <link rel="stylesheet" href="css/styles.css">
-  <script src='js/angular.min.js'></script>
-  <script src='js/angular-route.js'></script>
-  <script src='js/script.min.js'></script>
+  <script src='/js/angular.min.js'></script>
+  <script src='/js/angular-route.js'></script>
+  <script src='/js/script.min.js'></script>
    <base href="/">
 </head>
 <body ng-app="adriftApp">
 
-<a href="locations">Locations</a>
-<a href="collection/<%=currentUser._id%>">Collection</a>
-<a href="settings/<%=currentUser._id%>">Settings</a>
-<a href="user/logout">Log Out</a>
+<a href="adrift/locations">Locations</a>
+<a href="adrift/collection/<%=currentUser._id%>">Collection</a>
+<a href="adrift/settings/<%=currentUser._id%>">Settings</a>
+<a href="adrift/user/logout">Log Out</a>
 
 <div ng-view></div>
 

@@ -39,7 +39,7 @@ topicControllers.controller('TopicMessageController', ['$scope', '$http', '$rout
     $scope.topic.message = {};
 
     $scope.addMessage = function(message){
-      $http.post($routeParams.topicId + '/messages/', {'topic.message': $scope.topic.message}).
+      $http.post('messages/', {'topic.message': $scope.topic.message}).
 
       success(function(data, status) {
           $scope.status = status;
