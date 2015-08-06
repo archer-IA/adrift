@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema,
-    MessageSchema = require('./schemas/message.js');
-    Topic = require('./topic.js');
+    MessageSchema = require('./schemas/message.js'),
+    Topic = require('./topic.js'),
+    TimeCheck = require('../../lib/helpers/check_time.js');
 
 
 var UserSchema = new Schema({
@@ -13,8 +14,14 @@ var UserSchema = new Schema({
   messages: [MessageSchema],
   active: {type: Boolean, default: true},
   created_at: {type:Date, default: Date.now},
-  updated_at: {type: Date, default: Date.now}
+  updated_at: {type: Date, default: Date.now},
+  recieved_last: {type: Date, default: Date.now}
 })
+
+UserSchema.methods.getChance = function(){
+  var checker = new TimeCheck(this.recieved_last);
+  return checker.canGetMessage();
+}
 
 UserSchema.methods.sampleTopics = function(next){
   var length = this.topics.length;
