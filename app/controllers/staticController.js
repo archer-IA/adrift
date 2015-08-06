@@ -9,7 +9,7 @@ router.get('/', function(req, res, next){
 })
 
 
-router.get('/adrift', isCurrentUser, function(req, res, next){
+router.get('/adrift*', isCurrentUser, function(req, res, next){
   res.render('app', {currentUser: req.session.currentUser});
 })
 
