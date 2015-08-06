@@ -23,9 +23,9 @@ router.get('/', function(req, res, next){
 })
 
 router.post('/', function(req, res, next){
-  var message = req.body.topic.message;
+  var message = req.body.message;
   message._author = req.session.currentUser._id;
-  Topic.findByIdAndUpdate(req.params.id, { $push: { messages: message} }, function(err, topic){
+  Topic.findByIdAndUpdate(message.topic_id, { $push: { messages: message} }, function(err, topic){
     if(err){
       res.json({status: 'failure'});
     }else{
