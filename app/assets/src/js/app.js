@@ -1,5 +1,6 @@
 var adriftApp = angular.module('adriftApp', [
   'ngRoute',
+  'customFilters',
   'userControllers',
   'topicControllers'
 ]);

@@ -24,8 +24,8 @@ router.get('/', function(req, res, next){
 })
 
 // show
-router.get('/:id', function(req, res, next){
-  Topic.findById(req.params.id, function(err, topic){
+router.get('/:name', function(req, res, next){
+  Topic.findOne({ name: req.params.name}, function(err, topic){
     if(err){
       res.json({status: 'failure'});
     }else{

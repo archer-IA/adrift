@@ -20,10 +20,10 @@ module.exports = function(models, close){
   })
 
   var topic1 = new models.topic({
-    name: 'Sadness'
+    name: 'sadness'
   })
   topic2 = new models.topic({
-    name: 'Joy'
+    name: 'joy'
   })
 
   user.topics.push(topic1._id)
