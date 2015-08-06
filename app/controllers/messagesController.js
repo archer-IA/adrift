@@ -9,26 +9,64 @@ router.use(isCurrentUser);
 // show
 router.get('/', function(req, res, next){
   var id = req.session.currentUser._id;
+  console.log('def in here');
   User.findById(id, function(err, user){
     if(err){
       console.log(err);
       res.json({status: 'error'});
     }else{
-      if(user.hasPendingMessage){
+      console.log('checking for pendning');
+      if(user.hasPendingMessage()){
+        console.log('sending pending message');
         res.json({message: user.pendingMessage[0]});
       }else{
         var topic = user.sampleTopics(function(err, topic){;
+          console.log('topic');  
           if(err){
             res.json({status: 'error'});
           }else{
-            var message = topic.sampleMessage();
-            res.json({message: message});
+            var message = topic.sampleMessage(user, function(err, message){
+              if(err){
+                res.json({status: 'error'});
+              }else{
+                res.json({message: message});
+              }
+            });
           }
         });
       }
-      
     }
   })
+})
+
+router.post('/decision', function(req, res, next){
+  var id = req.session.currentUser._id;
+  if(req.body.response === 'yes'){
+    User.findById(id, function(err, user){
+      if(err){
+        console.log('user find error');
+        res.json({status: 'error'});
+      }else{
+        if(user.hasPendingMessage()){
+          var message = user.pendingMessage.splice(0,1);
+          user.messages.push(message[0]);
+          console.log(message)
+          user.save(function(err, user){
+            if(err){
+              console.log(err);
+              res.json({status: 'error'});
+            }else{
+              res.json({status: 'success', message: message})
+            }
+          })
+        }else{
+          res.json({status: 'error', error: "User has no pending message"});
+        }
+      }
+    });
+  }else{
+
+  }
 })
 
 router.post('/', function(req, res, next){

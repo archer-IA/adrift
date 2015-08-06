@@ -8,13 +8,28 @@ var TopicSchema = new Schema({
   messages: {type: [messageSchema], select: false}
 })
 
-TopicSchema.methods.sampleMessage = function(next){
+TopicSchema.methods.sampleMessage = function(user, next){
   var length = this.messages.length;
+  var that = this;
   if(length > 0){
     var index = Math.floor(Math.random() * length);
-    return this.messages[index];
+    user.pendingMessage = this.messages[index];
+    user.save(function(err, user){
+      if(err){
+        next(err)
+      }else{
+        var message = this.messages.splice(index, 1);
+        that.save(function(err, topic){
+          if(err){
+            next(err);
+          }else{
+            next(null, message);
+          }
+        })
+      }
+    })
   }else{
-    return null;
+    next({error: "no messages in this topic"});
   }
 }
 

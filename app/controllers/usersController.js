@@ -11,6 +11,12 @@ router.get('/', function(req,res){
   });
 });
 
+router.get('/current', function(req,res){
+  User.find({_id: req.sessions.currentUser}, function(err, user){
+    res.json({you: user});
+  });
+});
+
 // show 
 router.get('/:id', function(req, res){
   User.findById(req.params.id, function(err, user){
@@ -49,18 +55,7 @@ router.post('.:format?/', function(req,res){
   })
 });
 
-// update
-router.patch('/:id', function(req, res){
-  User.findByIdAndUpdate(req.params.id, req.body.user,{new: true}, function(err, user){
-    if(err){
-      res.json({status: 'failure'});
-    } else {
-      res.json({user: user, status: 'success'});
-    }
-  })
-})
-
-router.patch('/topic/:_topic', function(req, res){
+router.patch('/topics/:topic', function(req, res){
   User.findByIdAndUpdate(req.session.currentUser._id, {$push: {topics: req.params._topic}},{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
@@ -79,6 +74,20 @@ router.delete('/topic/:_topic', function(req, res){
     }
   })
 })
+
+
+// update
+router.patch('/:id', function(req, res){
+  User.findByIdAndUpdate(req.params.id, req.body.user,{new: true}, function(err, user){
+    if(err){
+      res.json({status: 'failure'});
+    } else {
+      res.json({user: user, status: 'success'});
+    }
+  })
+})
+
+
 
 // destroy
 router.delete('/:id', function(req, res){
