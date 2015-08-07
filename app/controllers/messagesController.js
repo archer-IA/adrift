@@ -15,7 +15,7 @@ router.get('/', function(req, res, next){
       res.json({status: 'failure', error: 'user find error'});
     }else if(user.hasPendingMessage()){
       res.json({message: user.pendingMessage[0]});
-    }else if(user.canGetMessage()){
+    }else if(user.canGetMessage() && user.doesGetMessage()){
       var topic = user.sampleTopics(function(err, topic){;
         if(err){
           res.json({status: 'failure', error: 'topic error'});
