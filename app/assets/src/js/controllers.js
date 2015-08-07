@@ -11,16 +11,31 @@ userControllers.controller('UserIndexCtrl', ['$scope', '$http',
 
 userControllers.controller('UserCollectionCtrl', ['$scope', '$http', 
   function($scope, $http) {
-    $http.get('users/current').success(function(data) {
-      $scope.pendingMessageContent = data.currentUser.pendingMessage[0].content[0];
-    });
     $scope.request = 'Request';
     $scope.requested = false;
+    $http.get('users/current').success(function(data) {
+      if(data.currentUser.messages[0]){
+        $scope.messages = data.currentUser.messages;
+        $scope.messages.forEach(function(message){
+          $http.get('/topics/id/' + message._topic).success(function(data){
+            console.log(data);
+          })
+        });
+      }
+      if(data.currentUser.pendingMessage[0]){
+        $scope.pendingMessageContent = data.currentUser.pendingMessage[0].content[0];
+        $scope.request = 'Requested';
+        $scope.requested = true;
+        $scope.decision ='Accept';
+      }
+    });
     $scope.requestMessage = function(){
       if($scope.requested == false){ 
         $http.get('messages/').
           success(function(data, status) {
-            $scope.pendingMessageContent = data.message.content[0];
+            if(data.message){
+              $scope.pendingMessageContent = data.message.content[0];
+            }
         });
         $scope.request = 'Requested'; 
         $scope.requested = true;
