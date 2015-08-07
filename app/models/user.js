@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
     TimeCheck = require('../../lib/helpers/check_time.js');
 
 
+
 var UserSchema = new Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true, select: false},
@@ -15,12 +16,20 @@ var UserSchema = new Schema({
   active: {type: Boolean, default: true},
   created_at: {type:Date, default: Date.now},
   updated_at: {type: Date, default: Date.now},
-  recieved_last: {type: Date, default: Date.now}
+  attemped_last: {type: Date, default: Date.now},
+  received_last: {type: Date, default: Date.now}
 })
 
-UserSchema.methods.getChance = function(){
-  var checker = new TimeCheck(this.recieved_last);
+UserSchema.methods.canGetMessage = function(){
+  var checker = new TimeCheck(this.attemped_last);
   return checker.canGetMessage();
+}
+
+UserSchema.methods.doesGetMessage = function(){
+  var checker = new TimeCheck(this.received_last);
+  var chance = getChance();
+  var roll = Math.random();
+  return roll < chance;
 }
 
 UserSchema.methods.sampleTopics = function(next){
@@ -54,10 +63,11 @@ UserSchema.methods.switchMessage = function(keep, next){
         next(err, {status: 'error', error: 'could not save user after adding message'});
       }else{
         if(!keep){
-          Topic.findByIdAndUpdate({_id: message._topic}, {$push: {messages: message}}, function(err,topic){
+          Topic.findOneAndUpdate({name: message.topicName}, {$push: {messages: message}}, function(err,topic){
             if(err){
               next(err, {status: 'error', error: 'could not save topic when puting message back'});
             }else{
+              console.log(topic);
               next(null, {status: 'success', message: message});
             }
           });
