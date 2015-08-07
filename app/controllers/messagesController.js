@@ -1,8 +1,9 @@
-var express = require('express'),
-    router = express.Router(),
-    User   = require('../models/user.js'),
+var express       = require('express'),
+    router        = express.Router(),
+    User          = require('../models/user.js'),
     isCurrentUser = require('../../lib/middleware/is_current_user.js'),
-    Topic = require('../models/topic.js');
+    Rubbish       = require('../models/rubbish.js'),
+    Topic         = require('../models/topic.js');
 
 router.use(isCurrentUser);
 
@@ -22,6 +23,7 @@ router.get('/', function(req, res, next){
         }else if(user.doesGetMessage()){
           var topic = user.sampleTopics(function(err, topic){;
             if(err){
+              console.log(err);
               res.json({status: 'failure', error: 'topic error'});
             }else{
               var message = topic.sampleMessage(user, function(err, message){

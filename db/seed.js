@@ -7,6 +7,14 @@ module.exports = function(models, close){
   var salt = bcrypt.genSaltSync(10);
   var pass = bcrypt.hashSync('pwd123', salt)
 
+  var rubbish1 = new models.rubbish({
+    content: 'I am rubbish, how are you doing?'
+  })
+
+  var rubbish2 = new models.rubbish({
+    content: 'To live is the rarest thing in the world. Most people exist, that is all.'
+  })
+
   var user = new models.user({
     username: 'alex',
     password: pass,
@@ -63,11 +71,20 @@ module.exports = function(models, close){
   user.save()
     .then(function(){
     return user2.save()
-  }).then(function(){
+  })
+  .then(function(){
     return topic1.save()
-  }).then(function(){
+  })
+  .then(function(){
     return topic2.save();
-  }).then(function(){
+  })
+  .then(function(){
+    return rubbish1.save();
+  })
+  .then(function(){
+    return rubbish2.save();
+  })
+  .then(function(){
     close();
   })
 
