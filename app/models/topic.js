@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema,
-    messageSchema = require('./schemas/message.js');
+    messageSchema = require('./schemas/message.js'),
+    Rubbish = require('./rubbish.js')
 
 
 var TopicSchema = new Schema({
@@ -30,7 +31,13 @@ TopicSchema.methods.sampleMessage = function(user, next){
       }
     })
   }else{
-    next({error: "no messages in this topic"});
+    Rubbish.findOne({}, function(err, rubbish){
+      if(err){
+        next({status: "failure", error: "no messages in this topic"});
+      }else{
+        next(null, rubbish);
+      }
+    })
   }
 }
 

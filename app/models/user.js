@@ -37,7 +37,7 @@ UserSchema.methods.sampleTopics = function(next){
   var length = this.topics.length;
   if( length > 0){
     var index = Math.floor(Math.random() * length);
-    Topic.findById(this.topics[index]).select('+messages').exec(function(err, topic){
+    Topic.findOne({name: this.topics[index]}).select('+messages').exec(function(err, topic){
       if(err){
         next(err);
       }else{
