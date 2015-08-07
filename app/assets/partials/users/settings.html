@@ -1,1 +1,8 @@
 <h1>User Settings</h1>
+
+<h2>User Profile</h2>
+<p>{{ user.username }}</p>
+<p>{{ user.email }}</p>
+
+<h2>User Subscriptions</h2>
+<p ng-repeat="topic in user.topics">{{ topic | capitalize }}</p>
