@@ -26,10 +26,10 @@ module.exports = function(models, close){
     name: 'joy'
   })
 
-  user.topics.push(topic1._id)
-  user.topics.push(topic2._id)
+  user.topics.push(topic1.name)
+  user.topics.push(topic2.name)
 
-  user2.topics.push(topic1._id)
+  user2.topics.push(topic1.name)
 
   user2.messages.push({
     _user: user._id,

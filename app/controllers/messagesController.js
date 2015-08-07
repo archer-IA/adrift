@@ -10,26 +10,34 @@ router.use(isCurrentUser);
 router.get('/', function(req, res, next){
   var id = req.session.currentUser._id;
   User.findById(id, function(err, user){
-    console.log(user.canGetMessage());
     if(err){
       res.json({status: 'failure', error: 'user find error'});
     }else if(user.hasPendingMessage()){
       res.json({message: user.pendingMessage[0]});
-    }else if(user.canGetMessage() && user.doesGetMessage()){
-      var topic = user.sampleTopics(function(err, topic){;
+    }else if(user.canGetMessage()){
+      user.attempted_last = Date.now();
+      user.save(function(err, user){
         if(err){
-          res.json({status: 'failure', error: 'topic error'});
-        }else{
-          var message = topic.sampleMessage(user, function(err, message){
+          res.json({status: 'failure', error: 'attempted_last update error'});
+        }else if(user.doesGetMessage()){
+          var topic = user.sampleTopics(function(err, topic){;
             if(err){
-              console.log(err);
-              res.json({status: 'failure', error: 'message error'});
+              res.json({status: 'failure', error: 'topic error'});
             }else{
-              res.json({message: message});
+              var message = topic.sampleMessage(user, function(err, message){
+                if(err){
+                  console.log(err);
+                  res.json({status: 'failure', error: 'message error'});
+                }else{
+                  res.json({message: message});
+                }
+              });
             }
           });
+        }else{
+          res.json({status: 'failure', error: 'no bottles were found on the eternal sea that is the interwebz'})
         }
-      });
+      })
     }else{
       res.json({status: 'failure', error: 'can only attempt to get a message once in a while'})
     }

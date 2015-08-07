@@ -12,7 +12,7 @@ router.get('/', function(req,res){
 });
 
 router.get('/current', function(req,res){
-  User.findOne({_id: req.session.currentUser}, function(err, user){
+  User.findOne({_id: req.session.currentUser}).select('+email').exec(function(err, user){
     res.json({currentUser: user});
   });
 });
@@ -56,8 +56,8 @@ router.post('.:format?/', function(req,res){
 });
 
 // subscriptions
-router.patch('/topics/:_topic', function(req, res){
-  User.findByIdAndUpdate(req.session.currentUser._id, {$push: {topics: req.params._topic}},{new: true}, function(err, user){
+router.patch('/topics/:topicName', function(req, res){
+  User.findByIdAndUpdate(req.session.currentUser._id, {$push: {topics: req.params.topicName}},{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
     } else {
