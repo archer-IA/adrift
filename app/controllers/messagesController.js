@@ -44,11 +44,11 @@ router.get('/', function(req, res, next){
   })
 })
 
+
 router.post('/decision', function(req, res, next){
   var id = req.session.currentUser._id;
   User.findById(id, function(err, user){
     if(err){
-      console.log('user find error');
       res.json({status: 'failure', message: 'could not find user'});
     }else{
       user.switchMessage(req.body.keep, function(err, response){

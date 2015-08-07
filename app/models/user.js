@@ -16,12 +16,13 @@ var UserSchema = new Schema({
   active: {type: Boolean, default: true},
   created_at: {type:Date, default: Date.now},
   updated_at: {type: Date, default: Date.now},
-  attemped_last: {type: Date, default: Date.now},
+  attempted_last: {type: Date, default: Date.now},
   received_last: {type: Date, default: Date.now}
 })
 
 UserSchema.methods.canGetMessage = function(){
-  var checker = new TimeCheck(this.attemped_last);
+  var checker = new TimeCheck(this.attempted_last);
+  console.log(checker.canGetMessage());
   return checker.canGetMessage();
 }
 
@@ -67,7 +68,6 @@ UserSchema.methods.switchMessage = function(keep, next){
             if(err){
               next(err, {status: 'error', error: 'could not save topic when puting message back'});
             }else{
-              console.log(topic);
               next(null, {status: 'success', message: message});
             }
           });
