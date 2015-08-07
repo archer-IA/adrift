@@ -14,7 +14,7 @@ TopicSchema.methods.sampleMessage = function(user, next){
   if(length > 0){
     var index = Math.floor(Math.random() * length);
     user.pendingMessage = this.messages[index];
-    user.recieved_last = Date.now();
+    user.received_last = Date.now();
     user.save(function(err, user){
       if(err){
         next(err);

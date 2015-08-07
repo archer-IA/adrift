@@ -10,7 +10,7 @@ var UserSchema = new Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true, select: false},
   email: {type: String, required: true, unique: true, select: false},
-  topics: [{type: Schema.Types.ObjectId}],
+  topics: [{type: String}],
   pendingMessage: [MessageSchema],
   messages: [MessageSchema],
   active: {type: Boolean, default: true},
@@ -27,7 +27,7 @@ UserSchema.methods.canGetMessage = function(){
 
 UserSchema.methods.doesGetMessage = function(){
   var checker = new TimeCheck(this.received_last);
-  var chance = getChance();
+  var chance = checker.getChance();
   var roll = Math.random();
   return roll < chance;
 }
