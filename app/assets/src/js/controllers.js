@@ -16,14 +16,9 @@ userControllers.controller('UserCollectionCtrl', ['$scope', '$http',
     $http.get('users/current').success(function(data) {
       if(data.currentUser.messages[0]){
         $scope.messages = data.currentUser.messages;
-        $scope.messages.forEach(function(message){
-          $http.get('/topics/id/' + message._topic).success(function(data){
-            console.log(data);
-          })
-        });
-      }
+      };
       if(data.currentUser.pendingMessage[0]){
-        $scope.pendingMessageContent = data.currentUser.pendingMessage[0].content[0];
+        $scope.pendingMessage = data.currentUser.pendingMessage[0];
         $scope.request = 'Requested';
         $scope.requested = true;
         $scope.decision ='Accept';
@@ -34,7 +29,7 @@ userControllers.controller('UserCollectionCtrl', ['$scope', '$http',
         $http.get('messages/').
           success(function(data, status) {
             if(data.message){
-              $scope.pendingMessageContent = data.message.content[0];
+              $scope.pendingMessage = data.message;
             }
         });
         $scope.request = 'Requested'; 
@@ -43,6 +38,20 @@ userControllers.controller('UserCollectionCtrl', ['$scope', '$http',
         console.log('already requested');
       };
     };
+    $scope.acceptMessage = function(){
+      $scope.keepMessage(true);
+    };
+    $scope.releaseMessage = function(){
+      $scope.keepMessage(false);
+    };
+    $scope.keepMessage = function(decision){
+      $http.post('/messages/decision', {keep: decision}).success(function(data){
+        if(data.status != "failure"){
+          $scope.messages.push($scope.pendingMessage);
+          $scope.pendingMessage = null;
+        }
+      })
+    }
   }]);
 
 userControllers.controller('UserSettingsCtrl', ['$scope', '$http', '$routeParams',
