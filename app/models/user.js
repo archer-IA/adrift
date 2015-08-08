@@ -11,7 +11,7 @@ var UserSchema = new Schema({
   password: {type: String, required: true, select: false},
   email: {type: String, required: true, unique: true, select: false},
   topics: [{type: String}],
-  pendingMessage: [MessageSchema],
+  pendingMessage: {},
   messages: [MessageSchema],
   active: {type: Boolean, default: true},
   created_at: {type:Date, default: Date.now},
@@ -47,6 +47,18 @@ UserSchema.methods.sampleTopics = function(next){
   }else{
     next({error: "User has no topics"});
   }
+}
+
+UserSchema.methods.setPendingMessage = function(message, next){
+  this.pendingMessage = message;
+  this.received_last = Date.now();
+  this.save(function(err, user){
+    if(err){
+      next(err);
+    }else{
+      next(null, user)
+    }
+  })
 }
 
 UserSchema.methods.hasPendingMessage = function(){

@@ -9,36 +9,50 @@ var TopicSchema = new Schema({
   messages: {type: [messageSchema], select: false}
 })
 
-TopicSchema.methods.sampleMessage = function(user, next){
+TopicSchema.methods.getMessage = function(next){
   var length = this.messages.length;
-  var that = this;
-  if(length > 0){
+  if(length){
     var index = Math.floor(Math.random() * length);
-    user.pendingMessage = this.messages[index];
-    user.received_last = Date.now();
-    user.save(function(err, user){
+    this.removeRanMessage(index, function(err, message){
       if(err){
         next(err);
       }else{
-        var message = that.messages.splice(index, 1)[0];
-        that.save(function(err, topic){
-          if(err){
-            next(err);
-          }else{
-            next(null, message);
-          }
-        })
+        next(null, message);
       }
     })
   }else{
     Rubbish.findOne({}, function(err, rubbish){
       if(err){
-        next({status: "failure", error: "no messages in this topic"});
+        next({status: "failure", error: "could not get rubbish"});
       }else{
         next(null, rubbish);
       }
     })
   }
+}
+
+TopicSchema.methods.sampleMessage = function(user, next){
+  this.getMessage(function(err, message){
+    console.log(message);
+    user.setPendingMessage(message, function(err, user){
+      if(err){
+        next(err);
+      }else{
+        next(null, message);
+      }
+    })
+  })
+}
+
+TopicSchema.methods.removeRanMessage = function(index, next){
+  var message = this.messages.splice(index, 1)[0];
+  this.save(function(err, topic){
+    if(err){
+      next(err);
+    }else{
+      next(null, message);
+    }
+  })
 }
 
 
