@@ -2,7 +2,8 @@ var mongoose = require('mongoose'),
     Schema   = mongoose.Schema,
     MessageSchema = require('./schemas/message.js'),
     Topic = require('./topic.js'),
-    TimeCheck = require('../../lib/helpers/check_time.js');
+    TimeCheck = require('../../lib/helpers/check_time.js'),
+    chances = require('../../lib/helpers/chances.js');
 
 
 

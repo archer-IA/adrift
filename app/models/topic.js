@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema,
     messageSchema = require('./schemas/message.js'),
-    Rubbish = require('./rubbish.js')
+    Rubbish = require('./rubbish.js'),
+    chances = require('../../lib/helpers/chances.js');
 
 
 var TopicSchema = new Schema({
@@ -11,7 +12,7 @@ var TopicSchema = new Schema({
 
 TopicSchema.methods.getMessage = function(next){
   var length = this.messages.length;
-  if(length){
+  if(length && chances.doesNotGetRubbish()){
     var index = Math.floor(Math.random() * length);
     this.removeMessage(index, function(err, message){
       if(err){

@@ -1,24 +1,25 @@
 var express = require('express'),
      router = express.Router(),
      User   = require('../models/user.js'),
+     isCurrentUser = require('../../lib/middleware/is_current_user.js'),
      bcrypt = require('bcrypt');
 
 
 // index
-router.get('/', function(req,res){
+router.get('/', isCurrentUser, function(req,res){
   User.find({}, function(err, users){
     res.json(users);
   });
 });
 
-router.get('/current', function(req,res){
+router.get('/current', isCurrentUser, function(req,res){
   User.findOne({_id: req.session.currentUser}).select('+email').exec(function(err, user){
     res.json({currentUser: user});
   });
 });
 
 // show 
-router.get('/:id', function(req, res){
+router.get('/:id', isCurrentUser, function(req, res){
   User.findById(req.params.id, function(err, user){
     if (err){
       res.json({status: 'failure'});
@@ -56,7 +57,7 @@ router.post('.:format?/', function(req,res){
 });
 
 // subscriptions
-router.patch('/topics/:topicName', function(req, res){
+router.patch('/topics/:topicName', isCurrentUser, function(req, res){
   User.findByIdAndUpdate(req.session.currentUser._id, {$push: {topics: req.params.topicName}},{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
@@ -66,7 +67,7 @@ router.patch('/topics/:topicName', function(req, res){
   })
 })
 
-router.delete('/topics/:_topic', function(req, res){
+router.delete('/topics/:_topic', isCurrentUser, function(req, res){
   User.findByIdAndUpdate(req.session.currentUser._id, {$pull: {topics: req.params._topic}},{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
@@ -77,8 +78,8 @@ router.delete('/topics/:_topic', function(req, res){
 })
 
 // update
-router.patch('/:id', function(req, res){
-  User.findByIdAndUpdate(req.params.id, req.body.user,{new: true}, function(err, user){
+router.patch('/', isCurrentUser, function(req, res){
+  User.findByIdAndUpdate(req.session.currentUser._id, req.body.user,{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
     } else {
@@ -88,8 +89,8 @@ router.patch('/:id', function(req, res){
 })
 
 // destroy
-router.delete('/:id', function(req, res){
-  User.findByIdAndUpdate(req.params.id, {active: false}, function(err){
+router.delete('/:id', isCurrentUser, function(req, res){
+  User.findByIdAndUpdate(req.session.currentUser._id, {active: false}, function(err){
     if(err){
       res.json({status: 'failure'});
     } else {
