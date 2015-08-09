@@ -2,6 +2,6 @@ module.exports = {
 
   rubbishChance: .05,
 
-  timeBetweenMessageAttempts: 1,
+  timeBetweenMessageAttempts: .1,
 
 }
