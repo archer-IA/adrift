@@ -2,10 +2,6 @@
 
 <div ng-controller='UserCollectionCtrl'>
 
-  <button ng-click="requestMessage()">
-    {{ request }}
-  </button>
-
   <div ng-if="pendingMessage">
     <h3>{{ pendingMessage.topicName | capitalize }}</h3>
     <p ng-repeat="entry in pendingMessage.content">{{ entry }}</p>

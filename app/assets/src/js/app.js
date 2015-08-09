@@ -30,3 +30,18 @@ adriftApp.config(['$routeProvider', '$locationProvider',
         redirectTo: '/adrift/locations'
       });
   }]);
+
+adriftApp.controller('MessageRequestCtrl', ['$scope', '$http', '$interval', 
+  function($scope, $http, $interval) {
+    angular.element(document).ready(function () {
+
+      $scope.requestMessage = function(){
+        $http.get('/messages').success(function(data) {
+          console.log('Getting Messages...')
+        });
+      };
+
+      $interval($scope.requestMessage, 1000);
+
+    });
+}]);
