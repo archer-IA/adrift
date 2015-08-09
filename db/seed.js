@@ -58,13 +58,13 @@ module.exports = function(models, close){
 
   topic2.messages.push({
     _user: user._id,
-    topicName: topic1.name,
+    topicName: topic2.name,
     content: 'Im in topic 2'
   })
 
   topic2.messages.push({
     _user: user._id,
-    topicName: topic1.name,
+    topicName: topic2.name,
     content: 'Duuuuuuuude'
   })
 

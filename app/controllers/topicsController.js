@@ -9,7 +9,7 @@ router.use(isCurrentUser);
 
 // index
 router.get('/', function(req, res, next){
-  Topic.find({}, function(err, topics){
+  Topic.find({}).select('+messages').exec(function(err, topics){
     if(err){
       res.json({
         status: 'failure'

@@ -14,14 +14,14 @@ router.get('/', function(req, res, next){
     if(err){
       res.json({status: 'failure', error: 'user find error'});
     }else if(user.hasPendingMessage()){
-      res.json({message: user.pendingMessage[0]});
+      res.json({message: user.pendingMessage});
     }else if(user.canGetMessage()){
       user.attempted_last = Date.now();
       user.save(function(err, user){
         if(err){
           res.json({status: 'failure', error: 'attempted_last update error'});
         }else if(user.doesGetMessage()){
-          var topic = user.sampleTopics(function(err, topic){;
+          user.sampleTopics(function(err, topic){;
             if(err){
               console.log(err);
               res.json({status: 'failure', error: 'topic error'});

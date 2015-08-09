@@ -13,7 +13,7 @@ TopicSchema.methods.getMessage = function(next){
   var length = this.messages.length;
   if(length){
     var index = Math.floor(Math.random() * length);
-    this.removeRanMessage(index, function(err, message){
+    this.removeMessage(index, function(err, message){
       if(err){
         next(err);
       }else{
@@ -44,7 +44,7 @@ TopicSchema.methods.sampleMessage = function(user, next){
   })
 }
 
-TopicSchema.methods.removeRanMessage = function(index, next){
+TopicSchema.methods.removeMessage = function(index, next){
   var message = this.messages.splice(index, 1)[0];
   this.save(function(err, topic){
     if(err){

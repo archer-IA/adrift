@@ -11,7 +11,7 @@ var UserSchema = new Schema({
   password: {type: String, required: true, select: false},
   email: {type: String, required: true, unique: true, select: false},
   topics: [{type: String}],
-  pendingMessage: {},
+  pendingMessage: {type: {}, default: null},
   messages: [MessageSchema],
   active: {type: Boolean, default: true},
   created_at: {type:Date, default: Date.now},
@@ -62,13 +62,14 @@ UserSchema.methods.setPendingMessage = function(message, next){
 }
 
 UserSchema.methods.hasPendingMessage = function(){
-  return this.pendingMessage.length > 0;
+  return this.pendingMessage !== null;
 }
 
 UserSchema.methods.switchMessage = function(keep, next){
   if(this.hasPendingMessage()){
-    var message = this.pendingMessage.splice(0,1)[0];
-    if(keep){
+    var message = this.pendingMessage;
+    this.pendingMessage = null;
+    if(keep && message.topicName !== "Rubbish"){
       this.messages.push(message);
     }
     this.save(function(err, user){
@@ -76,7 +77,7 @@ UserSchema.methods.switchMessage = function(keep, next){
         next(err, {status: 'error', error: 'could not save user after adding message'});
       }else{
         if(!keep){
-          Topic.findOneAndUpdate({name: message.topicName}, {$push: {messages: message}}, function(err,topic){
+          Topic.findOneAndUpdate({name: message.topicName}, {$push: {messages: message}}, function(err, topic){
             if(err){
               next(err, {status: 'error', error: 'could not save topic when puting message back'});
             }else{
