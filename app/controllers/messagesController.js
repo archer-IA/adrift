@@ -74,5 +74,18 @@ router.post('/', function(req, res, next){
   })
 })
 
+router.patch('/:id', function(req, res, next){
+  var id = req.params.id;
+  User.findById(req.session.currentUser._id, function(err, user){
+    if(err){
+      res.json({status: 'failure', message: 'could not find user'});
+    }else{
+      user.updateMessage(id, req.body.newContent, function(err, response){
+        res.json({status: 'success'});
+      })
+    }
+  });
+})
+
 
 module.exports = router;

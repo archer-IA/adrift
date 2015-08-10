@@ -66,11 +66,38 @@ UserSchema.methods.hasPendingMessage = function(){
   return this.pendingMessage !== null;
 }
 
+UserSchema.methods.updateMessage = function(id, toAdd, next){
+  var messageToUpdate;
+  if(this.pendingMessage._id === id){
+    messageToUpdate = this.pendingMessage;
+  }else{
+    this.messages.forEach(function(message){
+      if(message._id === id){
+        messageToUpdate = message;
+        // break;
+      }
+    })
+  }
+  if(messageToUpdate){
+    message.content.push(toAdd);
+    this.save(function(err, message){
+      if(err){
+        next(err);
+      }else{
+        next(null, user);
+      }
+    })
+  }else{
+    next({error: "message not found"});
+  }
+}
+
 UserSchema.methods.switchMessage = function(keep, next){
   if(this.hasPendingMessage()){
     var message = this.pendingMessage;
     this.pendingMessage = null;
     if(keep && message.topicName !== "Rubbish"){
+      console.log(message.topicName);
       this.messages.push(message);
     }
     this.save(function(err, user){

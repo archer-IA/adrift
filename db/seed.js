@@ -28,10 +28,12 @@ module.exports = function(models, close){
   })
 
   var topic1 = new models.topic({
-    name: 'sadness'
+    name: 'sadness',
+    desc: 'The country is grey and brown and white in trees, snows and skies of laughter, always diminshing, less funny not just darker, not just grey'
   })
   topic2 = new models.topic({
-    name: 'joy'
+    name: 'joy',
+    desc: 'Puppies'
   })
 
   user.topics.push(topic1.name)
@@ -48,24 +50,24 @@ module.exports = function(models, close){
   topic1.messages.push({
     _user: user._id,
     topicName: topic1.name,
-    content: 'Hi'
+    content: "One is the loneliest number that you'll ever see"
   })
   topic1.messages.push({
     _user: user._id,
     topicName: topic1.name,
-    content: 'Blah'
+    content: 'My heart is as black and deep as the depths of the ocean...'
   })
 
   topic2.messages.push({
     _user: user._id,
     topicName: topic2.name,
-    content: 'Im in topic 2'
+    content: 'EVERYTHING IS AWESOME!'
   })
 
   topic2.messages.push({
     _user: user._id,
     topicName: topic2.name,
-    content: 'Duuuuuuuude'
+    content: 'Happy Birthday!'
   })
 
   user.save()

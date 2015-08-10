@@ -7,7 +7,8 @@ var mongoose = require('mongoose'),
 
 var TopicSchema = new Schema({
   name: {type: String, required: true, unique: true},
-  messages: {type: [messageSchema], select: false}
+  messages: {type: [messageSchema], select: false},
+  desc: {type: 'String', required: true}
 })
 
 TopicSchema.methods.getMessage = function(next){
