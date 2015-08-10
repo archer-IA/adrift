@@ -6,4 +6,7 @@
 <p>{{ user.email }}</p>
 
 <h2>User Subscriptions</h2>
-<p ng-repeat="topic in user.topics">{{ topic | capitalize }}</p>
+
+<div ng-repeat="topic in user.topics">
+  <a class="pure-button button-small" href="adrift/locations/{{topic.name}}">{{ topic | capitalize }}</a>
+</div>

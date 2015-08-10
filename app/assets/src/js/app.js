@@ -22,7 +22,7 @@ adriftApp.config(['$routeProvider', '$locationProvider',
         templateUrl: 'partials/users/collection.html',
         controller: 'UserCollectionCtrl'
       }).
-      when('/adrift/locations/:topicId', {
+      when('/adrift/locations/:topicName', {
         templateUrl: 'partials/topics/show.html',
         controller: 'TopicShowCtrl'
       }).

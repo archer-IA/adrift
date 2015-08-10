@@ -11,7 +11,7 @@ topicControllers.controller('TopicIndexCtrl', ['$scope', '$http',
 
 topicControllers.controller('TopicShowCtrl', ['$scope', '$http', '$routeParams',
   function($scope, $http, $routeParams) {
-    $http.get('topics/' + $routeParams.topicId).success(function(data) {
+    $http.get('topics/' + $routeParams.topicName).success(function(data) {
       $scope.topic = data.topic;
     });
   }]);
@@ -51,7 +51,7 @@ topicControllers.controller('TopicSubscribeCtrl', ['$scope', '$http', '$routePar
 
 topicControllers.controller('TopicMessageCtrl', ['$scope', '$http', '$routeParams',
   function($scope, $http, $routeParams){
-    $scope.message = {_topic: $routeParams.topicId};
+    $scope.message = {topicName: $routeParams.topicName};
 
     $scope.addMessage = function(message){
       $scope.messageCopy = angular.copy($scope.message);

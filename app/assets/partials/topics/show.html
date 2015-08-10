@@ -1,5 +1,6 @@
 <div ng-controller='TopicShowCtrl'>
   <h1 class="margin-bottom-0">{{ topic.name | capitalize}}</h1>
+  <p>{{ topic.desc }}</p>
   <button class="pure-button button-small" ng-class="{'active' : subscribed}" ng-controller='TopicSubscribeCtrl' ng-click="locationSubscribe()">{{ subscription }}</button>
 </div>
 
