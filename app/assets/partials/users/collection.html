@@ -5,8 +5,8 @@
   <div ng-if="pendingMessage">
     <h3>{{ pendingMessage.topicName | capitalize }}</h3>
     <p ng-repeat="entry in pendingMessage.content">{{ entry }}</p>
-    <button ng-click="acceptMessage()">Accept</button>
-    <button ng-click="releaseMessage()">Release</button>
+    <button class="pure-button" ng-click="acceptMessage()">Accept</button>
+    <button class="pure-button" ng-click="releaseMessage()">Release</button>
   </div>
 
 

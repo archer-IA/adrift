@@ -2,7 +2,8 @@
 
 <div ng-controller='TopicIndexCtrl'>
   <div ng-repeat='topic in topics'>
-    <h2>{{ topic.name | capitalize }}</h2>
-    <a ng-href="adrift/locations/{{ topic.name }}">Go There</h2>
+    <a ng-href="adrift/locations/{{ topic.name }}">
+      <h2>{{ topic.name | capitalize }}</h2>
+    </a>
   </div>
 </div>

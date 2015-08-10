@@ -10,16 +10,17 @@
 $light: #EFF6FC;
 $medium: #CCDFEE;
 $dark: #9FBED6;
+$darker: #6D95B3;
 
 // Partials
-
 
 @import "custompure";
 @import "splash";
 @import "app";
+@import "nav";
 
 // Fonts
-
+@import url(http://fonts.googleapis.com/css?family=Cutive+Mono);
 @font-face {
     font-family: 'moonbold';
     src: url('../fonts/moon_bold-webfont.eot');
@@ -54,13 +55,32 @@ $dark: #9FBED6;
 };
 
 html, body, p, a, button {
-  font-family: 'courier';
+  font-family: 'Cutive Mono';
+  font-weight: 200;
 };
 
 h1, h2, h3, h4 {
-  font-family: 'moonbold';
-}
+  font-family: 'moonlight';
+  color: $darker;
+  margin: 1em 0;
+};
+
+h1 {
+  font-size: 2em;
+};
+
+.inline-block {
+  display: inline-block;
+};
 
 a {
   @include unstyled-link;
 };
+
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+p {
+  padding: 0.5em;
+}

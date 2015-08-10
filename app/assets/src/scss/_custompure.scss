@@ -1,0 +1,13 @@
+.pure-button{
+  font-family: 'moonlight';
+  color: $dark;
+  border: 2px solid $dark;
+  background-color: transparent;
+  margin: 1em 0;
+}
+.pure-button:hover, .pure-button:focus {
+  color: white;
+  background-color: $dark;
+  background-image: none;
+}
+
