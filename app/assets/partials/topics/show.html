@@ -4,10 +4,10 @@
   <h2>{{ topic.name | capitalize}}</h2>
 </div>
 
-<button ng-class="{'active' : subscribed}" ng-controller='TopicSubscribeCtrl' ng-click="locationSubscribe()">{{ subscription }}</button>
+<button class="pure-button" ng-class="{'active' : subscribed}" ng-controller='TopicSubscribeCtrl' ng-click="locationSubscribe()">{{ subscription }}</button>
 
 <form ng-submit="addMessage(message)" ng-controller='TopicMessageCtrl'>
   <textarea name="content" ng-model="message.content"></textarea>
-  <input type="submit" value="click">
+  <input class="pure-button" type="submit" value="click">
 </form>
 

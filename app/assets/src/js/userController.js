@@ -14,8 +14,8 @@ userControllers.controller('UserCollectionCtrl', ['$scope', '$http', '$interval'
 
     $scope.checkForMessage = function(){
       $http.get('users/current').success(function(data) {
-        if(data.currentUser.pendingMessage[0]){
-          $scope.pendingMessage = data.currentUser.pendingMessage[0];
+        if(data.currentUser.pendingMessage){
+          $scope.pendingMessage = data.currentUser.pendingMessage;
           $scope.decision ='Accept';
           console.log('Checking for Message...')
         }
@@ -28,24 +28,28 @@ userControllers.controller('UserCollectionCtrl', ['$scope', '$http', '$interval'
       if(data.currentUser.messages[0]){
         $scope.messages = data.currentUser.messages;
       };
-      if(data.currentUser.pendingMessage[0]){
-        $scope.pendingMessage = data.currentUser.pendingMessage[0];
+      if(data.currentUser.pendingMessage){
+        $scope.pendingMessage = data.currentUser.pendingMessage;
         $scope.decision ='Accept';
       }
     });
 
     $scope.acceptMessage = function(){
-      $scope.keepMessage(true);
+      $scope.keep = true;
+      $scope.keepMessage($scope.keep);
     };
 
     $scope.releaseMessage = function(){
-      $scope.keepMessage(false);
+      $scope.keep = false;
+      $scope.keepMessage($scope.keep);
     };
 
     $scope.keepMessage = function(decision){
       $http.post('/messages/decision', {keep: decision}).success(function(data){
         if(data.status != "failure"){
-          $scope.messages.push($scope.pendingMessage);
+          if($scope.keep == true){
+            $scope.messages.push($scope.pendingMessage);
+          }
           $scope.pendingMessage = null;
         }
       })

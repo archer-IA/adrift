@@ -26,14 +26,22 @@ module.exports = function(grunt){
         files: {
           'app/assets/css/styles.css' : 'app/assets/src/scss/**/*.scss'
         } 
-      },
-      build: {
+      }
+    },
+    compass: {
+      dev: {
         options: {
-          outputStyle: 'compressed'
-        },
-        files: {
-          'app/assets/css/styles.css' : 'app/assets/src/scss/**/*.scss'
+          sassDir: 'app/assets/src/scss',
+          cssDir: 'app/assets/css'
         }
+      }
+    },
+    build: {
+      options: {
+        outputStyle: 'compressed'
+      },
+      files: {
+        'app/assets/css/styles.css' : 'app/assets/src/scss/styles.scss'
       }
     },
     watch: {
@@ -43,7 +51,7 @@ module.exports = function(grunt){
       },
       css: {
         files: ['app/assets/src/scss/**/*.scss'],
-        tasks: ['sass:dev']
+        tasks: ['compass:dev']
       }
     }
     
@@ -52,10 +60,11 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-compass');
 
 
-  grunt.registerTask('default', ['uglify:dev', 'sass:dev']);
+  grunt.registerTask('default', ['uglify:dev', 'compass:dev']);
   grunt.registerTask('build', ['uglify:build']);
-  grunt.registerTask('dev', ['uglify:dev', 'sass:build']);
+  grunt.registerTask('dev', ['uglify:dev', 'compass:build']);
 
 }

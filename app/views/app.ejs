@@ -3,26 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Adrift</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
   <script src='/js/angular.min.js'></script>
   <script src='/js/angular-route.js'></script>
   <script src='/js/script.min.js'></script>
-   <base href="/">
+  <base href="/">
 </head>
 <body ng-app="adriftApp">
-<div ng-controller="MessageRequestCtrl">
+  <div class="pure-g">
 
-</div>
+    <div id="wrapperLeft" class="pure-u-1-2" ng-controller="MessageRequestCtrl">
+      <div id="water"></div>
+    </div>
 
-<a href="adrift/locations">Locations</a>
-<a href="adrift/collection">Collection</a>
-<a href="adrift/settings">Settings</a>
-<form action="/sessions/logout?_method=DELETE" method='POST'>
-  <input type="submit" value='Logout' />
-</form>
 
-<div ng-view></div>
+    <div id="wrapperRight" class="pure-u-1-2">
+      <nav> 
+        <a class="pure-button" href="adrift/locations">Locations</a>
+        <a class="pure-button" href="adrift/collection">Collection</a>
+        <a class="pure-button" href="adrift/settings">Settings</a>
 
+        <form id="logout" action="/sessions/logout?_method=DELETE" method='POST'>
+          <input class="pure-button" type="submit" value='Logout' />
+        </form>
+      </nav>
+      <div id="textbox"></div>
+      <div ng-view></div>
+    </div>
+
+  </div>
 </body>
 </html>
 
