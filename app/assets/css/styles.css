@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Cutive+Mono);
 /* line 5, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -63,37 +64,66 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
+/* line 1, ../src/scss/_custompure.scss */
+.pure-button {
+  font-family: 'moonlight';
+  color: #9FBED6;
+  border: 2px solid #9FBED6;
+  background-color: transparent;
+  margin: 1em 0;
+}
+
+/* line 8, ../src/scss/_custompure.scss */
+.pure-button:hover, .pure-button:focus {
+  color: white;
+  background-color: #9FBED6;
+  background-image: none;
+}
+
 /* line 1, ../src/scss/_app.scss */
 form#logout {
   display: inline-block;
 }
 
 /* line 4, ../src/scss/_app.scss */
-#wrapperLeft {
+#wrapperLeft, #wrapperRight, #water {
   position: absolute;
   top: 0;
   bottom: 0;
+}
+
+/* line 9, ../src/scss/_app.scss */
+#wrapperLeft {
   left: 0;
   background-color: #EFF6FC;
 }
 
-/* line 11, ../src/scss/_app.scss */
+/* line 13, ../src/scss/_app.scss */
 #wrapperRight {
-  position: absolute;
-  top: 0;
-  bottom: 0;
   right: 0;
   left: 50%;
+  padding: 1em;
 }
 
 /* line 18, ../src/scss/_app.scss */
 #water {
-  position: absolute;
   top: 50%;
-  bottom: 0;
   left: 0;
   right: 0;
   background-color: #CCDFEE;
+}
+
+/* line 1, ../src/scss/_nav.scss */
+nav {
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
 }
 
 @font-face {
@@ -110,7 +140,7 @@ form#logout {
   font-weight: normal;
   font-style: normal;
 }
-/* line 51, ../src/scss/styles.scss */
+/* line 52, ../src/scss/styles.scss */
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -118,17 +148,30 @@ form#logout {
   color: #9FBED6;
 }
 
-/* line 56, ../src/scss/styles.scss */
+/* line 57, ../src/scss/styles.scss */
 html, body, p, a, button {
-  font-family: 'courier';
+  font-family: 'Cutive Mono';
+  font-weight: 200;
 }
 
-/* line 60, ../src/scss/styles.scss */
+/* line 62, ../src/scss/styles.scss */
 h1, h2, h3, h4 {
-  font-family: 'moonbold';
+  font-family: 'moonlight';
+  color: #6D95B3;
+  margin: 1em 0;
 }
 
-/* line 64, ../src/scss/styles.scss */
+/* line 68, ../src/scss/styles.scss */
+h1 {
+  font-size: 2em;
+}
+
+/* line 72, ../src/scss/styles.scss */
+.inline-block {
+  display: inline-block;
+}
+
+/* line 76, ../src/scss/styles.scss */
 a {
   color: inherit;
   text-decoration: inherit;
@@ -137,4 +180,14 @@ a {
 /* line 6, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_unstyled-link.scss */
 a:active, a:focus {
   outline: none;
+}
+
+/* line 80, ../src/scss/styles.scss */
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+/* line 84, ../src/scss/styles.scss */
+p {
+  padding: 0.5em;
 }
