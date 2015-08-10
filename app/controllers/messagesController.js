@@ -22,8 +22,6 @@ router.get('/', function(req, res, next){
           res.json({status: 'failure', error: 'attempted_last update error'});
         }else if(user.doesGetMessage()){
           user.sampleTopics(function(err, topic){;
-            console.log("error: " + err);
-            console.log(topic);
             if(err){
               console.log(err);
               res.json({status: 'failure', error: 'topic error'});

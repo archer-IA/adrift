@@ -36,7 +36,7 @@ module.exports = function(models, close){
     desc: 'Puppies'
   })
 
-  user.topics.push(topic1.name)
+  // user.topics.push()
   user.topics.push(topic2.name)
 
   user2.topics.push(topic1.name)

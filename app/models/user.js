@@ -23,7 +23,6 @@ var UserSchema = new Schema({
 
 UserSchema.methods.canGetMessage = function(){
   var checker = new TimeCheck(this.attempted_last);
-  console.log(checker.canGetMessage());
   return checker.canGetMessage();
 }
 
@@ -36,8 +35,6 @@ UserSchema.methods.doesGetMessage = function(){
 
 UserSchema.methods.sampleTopics = function(next){
   var length = this.topics.length;
-  console.log("length: " + lenght);
-  console.log('in sample topics');
   if( length > 0){
     var index = Math.floor(Math.random() * length);
     Topic.findOne({name: this.topics[index]}).select('+messages').exec(function(err, topic){

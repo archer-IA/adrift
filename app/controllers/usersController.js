@@ -13,6 +13,7 @@ router.get('/', isCurrentUser, function(req,res){
 });
 
 router.get('/current', isCurrentUser, function(req,res){
+  console.log('in /users/current');
   User.findOne({_id: req.session.currentUser}).select('+email').exec(function(err, user){
     res.json({currentUser: user});
   });
@@ -67,7 +68,7 @@ router.patch('/topics/:topicName', isCurrentUser, function(req, res){
   })
 })
 
-router.delete('/topics/:_topic', isCurrentUser, function(req, res){
+router.delete('/topics/:topicName', isCurrentUser, function(req, res){
   User.findByIdAndUpdate(req.session.currentUser._id, {$pull: {topics: req.params.topicName}},{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
