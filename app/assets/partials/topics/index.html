@@ -1,9 +1,10 @@
-<h1>Topics</h1>
+<h1>Locations</h1>
+<hr>
 
 <div ng-controller='TopicIndexCtrl'>
   <div ng-repeat='topic in topics'>
     <a ng-href="adrift/locations/{{ topic.name }}">
-      <h2>{{ topic.name | capitalize }}</h2>
+      <button class='pure-button button-small'>{{ topic.name | capitalize }}</button>
     </a>
   </div>
 </div>

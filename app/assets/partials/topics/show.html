@@ -1,12 +1,12 @@
-
-
 <div ng-controller='TopicShowCtrl'>
   <h1 class="margin-bottom-0">{{ topic.name | capitalize}}</h1>
   <button class="pure-button button-small" ng-class="{'active' : subscribed}" ng-controller='TopicSubscribeCtrl' ng-click="locationSubscribe()">{{ subscription }}</button>
 </div>
 
-<form ng-submit="addMessage(message)" ng-controller='TopicMessageCtrl'>
-  <textarea name="content" ng-model="message.content"></textarea>
-  <input class="pure-button" type="submit" value="click">
+<form class="pure-form" ng-submit="addMessage(message)" ng-controller='TopicMessageCtrl'>
+  <fieldset>
+    <textarea name="content" ng-model="message.content"></textarea>
+  </fieldset>
+  <input class="pure-button button-small" type="submit" value="Release">
 </form>
 
