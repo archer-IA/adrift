@@ -68,7 +68,7 @@ router.patch('/topics/:topicName', isCurrentUser, function(req, res){
 })
 
 router.delete('/topics/:_topic', isCurrentUser, function(req, res){
-  User.findByIdAndUpdate(req.session.currentUser._id, {$pull: {topics: req.params._topic}},{new: true}, function(err, user){
+  User.findByIdAndUpdate(req.session.currentUser._id, {$pull: {topics: req.params.topicName}},{new: true}, function(err, user){
     if(err){
       res.json({status: 'failure'});
     } else {
