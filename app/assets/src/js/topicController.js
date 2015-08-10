@@ -31,14 +31,14 @@ topicControllers.controller('TopicSubscribeCtrl', ['$scope', '$http', '$routePar
 
       $scope.locationSubscribe = function(){
         if($scope.subscribed == false){ 
-          $http.patch('users/topics/' + $routeParams.topicId).
+          $http.patch('users/topics/' + $routeParams.topicName).
             success(function(data, status) {
               console.log(data);
           });
           $scope.subscription = 'Subscribed'; 
           $scope.subscribed = true;
         } else if ($scope.subscribed == true) {
-          $http.delete('users/topics/' + $routeParams.topicId).
+          $http.delete('users/topics/' + $routeParams.topicName).
             success(function(data, status) {
               console.log(data);
           });
