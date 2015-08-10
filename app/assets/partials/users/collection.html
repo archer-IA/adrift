@@ -1,12 +1,13 @@
 <h1>User Collection</h1>
+<hr>
 
 <div ng-controller='UserCollectionCtrl'>
 
   <div ng-if="pendingMessage">
     <h3>{{ pendingMessage.topicName | capitalize }}</h3>
     <p ng-repeat="entry in pendingMessage.content">{{ entry }}</p>
-    <button class="pure-button" ng-click="acceptMessage()">Accept</button>
-    <button class="pure-button" ng-click="releaseMessage()">Release</button>
+    <button class="pure-button button-small" ng-click="acceptMessage()">Accept</button>
+    <button class="pure-button button-small" ng-click="releaseMessage()">Release</button>
   </div>
 
 

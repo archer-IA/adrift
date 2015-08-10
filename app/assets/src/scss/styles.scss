@@ -18,6 +18,7 @@ $darker: #6D95B3;
 @import "splash";
 @import "app";
 @import "nav";
+@import "form";
 
 // Fonts
 @import url(http://fonts.googleapis.com/css?family=Cutive+Mono);
@@ -67,7 +68,12 @@ h1, h2, h3, h4 {
 
 h1 {
   font-size: 2em;
+  margin-bottom: 0.3em;
 };
+
+h2 {
+  font-size: 1.5em;
+}
 
 .inline-block {
   display: inline-block;
@@ -83,4 +89,12 @@ a {
 
 p {
   padding: 0.5em;
+}
+
+hr {
+  display: block; height: 1px;
+  border: 0; 
+  border-top: 1px solid $medium;
+  margin: 1em 0;
+  padding: 0; 
 }
