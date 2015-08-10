@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Cutive+Mono);
-/* line 5, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -21,68 +21,51 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
 
 /* line 1, ../src/scss/_custompure.scss */
 .pure-button {
-  font-family: 'moonlight';
-  color: white;
-  border: 2px solid #9FBED6;
-  background-color: #9FBED6;
-  margin: 1em 0;
-  min-width: 120px;
-}
-
-/* line 9, ../src/scss/_custompure.scss */
-.pure-button:hover, .pure-button:focus {
-  color: #9FBED6;
-  background-color: white;
-  background-image: none;
-}
-
-/* line 14, ../src/scss/_custompure.scss */
-.button-small {
   font-family: 'moonlight';
   color: #9FBED6;
   border: 1px solid #9FBED6;
@@ -91,10 +74,27 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   min-width: 120px;
 }
 
-/* line 22, ../src/scss/_custompure.scss */
-.button-small:hover, .pure-button:focus {
+/* line 9, ../src/scss/_custompure.scss */
+.pure-button:hover, .pure-button:focus {
   color: white;
   background-color: #9FBED6;
+  background-image: none;
+}
+
+/* line 14, ../src/scss/_custompure.scss */
+.button-small {
+  font-family: 'moonlight';
+  color: white;
+  border: 1px solid #9FBED6;
+  background-color: #9FBED6;
+  margin: 1em 0;
+  min-width: 120px;
+}
+
+/* line 22, ../src/scss/_custompure.scss */
+.button-small:hover, .button-small:focus {
+  color: #9FBED6;
+  background-color: white;
   background-image: none;
 }
 
@@ -153,6 +153,11 @@ textarea {
   resize: none;
 }
 
+/* line 8, ../src/scss/_form.scss */
+input[type=text] {
+  border-radius: 0 !important;
+}
+
 @font-face {
   font-family: 'moonbold';
   src: url("../fonts/moon_bold-webfont.eot");
@@ -176,7 +181,7 @@ textarea {
 }
 
 /* line 58, ../src/scss/styles.scss */
-html, body, p, a, button {
+html, body, p, a, button, textarea {
   font-family: 'Cutive Mono';
   font-weight: 200;
 }
@@ -210,7 +215,7 @@ a {
   text-decoration: inherit;
   cursor: inherit;
 }
-/* line 6, ../../../../../../.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_unstyled-link.scss */
+/* line 6, ../../../../../.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/typography/links/_unstyled-link.scss */
 a:active, a:focus {
   outline: none;
 }
@@ -222,7 +227,7 @@ a:active, a:focus {
 
 /* line 90, ../src/scss/styles.scss */
 p {
-  padding: 0.5em;
+  padding: 0.5em 0;
 }
 
 /* line 94, ../src/scss/styles.scss */

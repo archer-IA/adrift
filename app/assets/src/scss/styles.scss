@@ -55,7 +55,7 @@ $darker: #6D95B3;
   color: $dark;
 };
 
-html, body, p, a, button {
+html, body, p, a, button, textarea {
   font-family: 'Cutive Mono';
   font-weight: 200;
 };
@@ -88,7 +88,7 @@ a {
 }
 
 p {
-  padding: 0.5em;
+  padding: 0.5em 0;
 }
 
 hr {

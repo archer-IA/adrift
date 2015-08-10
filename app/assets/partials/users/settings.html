@@ -1,11 +1,11 @@
 <h1>User Settings</h1>
 <hr>
 
-<h2>User Profile</h2>
+<h3>User Profile</h3>
 <p>{{ user.username }}</p>
 <p>{{ user.email }}</p>
 
-<h2>User Subscriptions</h2>
+<h3>User Subscriptions</h3>
 
 <div ng-repeat="topic in user.topics">
   <a class="pure-button button-small" href="adrift/locations/{{topic.name}}">{{ topic | capitalize }}</a>

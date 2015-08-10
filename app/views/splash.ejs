@@ -7,19 +7,33 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Log In</h1>
-  <form action="/sessions/login" method="post">
-    <input type="text" name="user[username]" placeholder="Username">
-    <input type="text" name="user[password]" placeholder = "Password">
-    <input type="submit" value="Log In">
-  </form>
+  <input class="modal-trigger" type="radio" name="modal-trigger" id="login">
+  <label for="login">Log In</label>
+  <div class="modal-overlay">
+    <div class="modal-wrapper">
+      <h1>Log In</h1>
+      <form class="pure-form pure-form-stacked"action="/sessions/login" method="post">
+        <input type="text" name="user[username]" placeholder="Username">
+        <input type="text" name="user[password]" placeholder = "Password">
+        <input class="pure-button button-small" type="submit" value="Log In">
+      </form>
+    </div>
+  </div>
 
-  <h1>Sign Up</h1>
-  <form action="/users" method="post">
-    <input type="text" name="user[username]" placeholder="Username">
-    <input type="text" name="user[password]" placeholder="Password">
-    <input type="email" name="user[email]" placeholder="Email">
-    <input type="submit" value="Sign Up">
-  </form>
+  <input class="modal-trigger" type="radio" name="modal-trigger" id="signup">
+  <label for="signup">Sign Up</label>
+  <div class="modal-overlay">
+    <div class="modal-wrapper">
+      <h1>Sign Up</h1>
+      <form class="pure-form pure-form-stacked" action="/users" method="post">
+        <input type="text" name="user[username]" placeholder="Username">
+        <input type="text" name="user[password]" placeholder="Password">
+        <input type="email" name="user[email]" placeholder="Email">
+        <input class="pure-button button-small" type="submit" value="Sign Up">
+      </form>
+    </div>
+  </div>
+
+
 </body>
 </html>

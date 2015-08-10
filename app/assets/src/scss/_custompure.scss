@@ -1,27 +1,28 @@
 .pure-button{
   font-family: 'moonlight';
-  color: white;
-  border: 2px solid $dark;
-  background-color: $dark;
-  margin: 1em 0;
-  min-width: 120px;
-}
-.pure-button:hover, .pure-button:focus {
-  color: $dark;
-  background-color: white;
-  background-image: none;
-}
-.button-small{
-  font-family: 'moonlight';
   color: $dark;
   border: 1px solid $dark;
   background-color: transparent;
   margin: 1em 0;
   min-width: 120px;
 }
-.button-small:hover, .pure-button:focus {
+.pure-button:hover, .pure-button:focus {
   color: white;
   background-color: $dark;
   background-image: none;
 }
+.button-small{
+  font-family: 'moonlight';
+  color: white;
+  border: 1px solid $dark;
+  background-color: $dark;
+  margin: 1em 0;
+  min-width: 120px;
+}
+.button-small:hover, .button-small:focus {
+  color: $dark;
+  background-color: white;
+  background-image: none;
+}
+
 

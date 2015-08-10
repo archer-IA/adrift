@@ -5,3 +5,6 @@ textarea {
   border: 1px solid $medium;
   resize: none;
 }
+input[type=text]{
+  border-radius: 0 !important;
+}

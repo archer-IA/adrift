@@ -21,7 +21,7 @@ topicControllers.controller('TopicSubscribeCtrl', ['$scope', '$http', '$routePar
     $http.get('users/current').success(function(data) {
       $scope.currentUser = data.currentUser;
 
-      if($scope.currentUser.topics.indexOf($routeParams.topicId) != -1){
+      if($scope.currentUser.topics.indexOf($routeParams.topicName) != -1){
         $scope.subscription = 'Subscribed';
         $scope.subscribed = true;
       } else {
